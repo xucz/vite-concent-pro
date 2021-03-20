@@ -3,7 +3,7 @@
 </p>
 
 ## 概述
-concent-pro是一个帮用户整合[concent](https://github.com/concentjs/concent)和[react](https://github.com/facebook/react)相关生态库并内置了最佳实践指导的项目，以便提供给用户开箱即用的体验，包括但不局限于以下功能：
+vite-concent-pro是一个帮用户整合[vite](https://cn.vitejs.dev/) + [concent](https://github.com/concentjs/concent) + [react](https://github.com/facebook/react) 相关生态库并内置了最佳实践指导的项目，以便提供给用户开箱即用的体验，包括但不局限于以下功能：
 - 常用concent api示范
 - model目录组织示范
 - ts整合示范
@@ -15,8 +15,12 @@ concent-pro是一个帮用户整合[concent](https://github.com/concentjs/concen
 ## 安装与运行
 - 拉取项目代码
 ```bash
-git clone https://github.com/tnfe/concent-pro.git
-cd concent-pro
+git clone git@github.com:tnfe/vite-concent-pro.git
+cd vite-concent-pro
+```
+- 设置为个人的仓库地址
+```
+git remote set-url origin git@github.com:tnfe/vite-concent-pro.git
 ```
 
 - 安装相关依赖
@@ -27,7 +31,6 @@ npm i
 - 启动与调试项目
 ```bash
 npm start 启动服务
-// 如需分开启动
 npm run build 编译打包
 npm run preview 预览打包后的代码
 ```
@@ -58,7 +61,6 @@ git push (触发 husky钩子 pre-commit: npm run test)
 
 ## 技术栈
 ### 运行时依赖
-* [vite 2.1.0](https://cn.vitejs.dev/) 下一代前端开发与构建工具   
 * [react 16.13.1](https://github.com/facebook/react) 组件化编程ui基础库   
 * [react-router v5](https://github.com/ReactTraining/react-router) react路由方案 
 * [concent v2](https://github.com/concentjs/concent) 内置依赖收集，高性能、渐进式的react开发框架
@@ -66,6 +68,7 @@ git push (触发 husky钩子 pre-commit: npm run test)
 * [ant-design v4](https://github.com/ant-design/ant-design) react基础ui组件库
 
 ### 开发依赖
+* [vite 2.1.0](https://cn.vitejs.dev/) 下一代前端开发与构建工具  
 * [create-react-app v3](https://github.com/facebook/create-react-app)   
 * [mocker-api v1.13](https://github.com/jaywcjlove/mocker-api)    
 * eslint
