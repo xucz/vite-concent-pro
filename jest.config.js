@@ -1,4 +1,5 @@
 // jest --updateSnapshot 或 jest -u 更新快照
+// const presetReactApp = require('babel-preset-react-app');
 
 const jestConfig = {
   roots: ['<rootDir>'],
@@ -21,7 +22,8 @@ const jestConfig = {
   ],
   testEnvironment: 'jest-environment-jsdom-fourteen',
   transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+    // vite react项目里面单测需要在这里把babel-react-app传递进去，不可在项目中或者package.json里面配置babel
+    "^.+\\.(js|jsx|ts|tsx)$": ["<rootDir>/node_modules/babel-jest", {"presets": ['babel-preset-react-app'] }],
     "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
     "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js",
   },

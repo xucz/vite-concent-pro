@@ -755,6 +755,11 @@ exports[`Demo Render generate Demo snapshot 1`] = `
                                         },
                                       ]
                                     }
+                                    scroll={
+                                      Object {
+                                        "x": "100%",
+                                      }
+                                    }
                                     stickyOffsets={
                                       Object {
                                         "left": Array [
@@ -1629,7 +1634,7 @@ exports[`Demo Render generate Demo snapshot 1`] = `
                           prefixCls="ant-select"
                           removeIcon={<ForwardRef(CloseOutlined) />}
                           showSearch={false}
-                          transitionName="slide-up"
+                          transitionName="ant-slide-up"
                           value="50"
                         >
                           <ForwardRef(Select)
@@ -1652,7 +1657,7 @@ exports[`Demo Render generate Demo snapshot 1`] = `
                             prefixCls="ant-select"
                             removeIcon={<ForwardRef(CloseOutlined) />}
                             showSearch={false}
-                            transitionName="slide-up"
+                            transitionName="ant-slide-up"
                             value="50"
                           >
                             <div
@@ -1749,7 +1754,7 @@ exports[`Demo Render generate Demo snapshot 1`] = `
                                   />
                                 }
                                 prefixCls="ant-select"
-                                transitionName="slide-up"
+                                transitionName="ant-slide-up"
                               >
                                 <Trigger
                                   action={Array []}
@@ -1918,7 +1923,7 @@ exports[`Demo Render generate Demo snapshot 1`] = `
                                       "minWidth": null,
                                     }
                                   }
-                                  popupTransitionName="slide-up"
+                                  popupTransitionName="ant-slide-up"
                                   prefixCls="ant-select-dropdown"
                                   showAction={Array []}
                                 >
@@ -1988,7 +1993,7 @@ exports[`Demo Render generate Demo snapshot 1`] = `
                                     searchValue=""
                                     showSearch={false}
                                     tokenWithEnter={false}
-                                    transitionName="slide-up"
+                                    transitionName="ant-slide-up"
                                     value="50"
                                     values={
                                       Array [
@@ -2097,7 +2102,7 @@ exports[`Demo Render generate Demo snapshot 1`] = `
                                         searchValue=""
                                         showSearch={false}
                                         tokenWithEnter={false}
-                                        transitionName="slide-up"
+                                        transitionName="ant-slide-up"
                                         value="50"
                                         values={
                                           Array [

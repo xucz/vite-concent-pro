@@ -12,12 +12,12 @@ const demoCloned = {
 };
 
 const allModels = {
-  // ...globalModel,
-  // ...counterModel,
-  // ...demoModel,
-  // ...demoCloned,
-  // ...homeModel,
-  // ...todoListModel,
+  ...globalModel,
+  ...counterModel,
+  ...demoModel,
+  ...demoCloned,
+  ...homeModel,
+  ...todoListModel,
 };
 
 export default allModels;

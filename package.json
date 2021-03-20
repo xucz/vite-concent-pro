@@ -31,12 +31,14 @@
     "react-json-editor-ajrm": "^2.5.13",
     "react-router-concent": "^2.1.3",
     "react-router-dom": "^5.2.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "util": "^0.10.3"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@testing-library/jest-dom": "^4.2.4",
     "@types/enzyme": "^3.10.8",
-    "@types/jest": "^26.0.21",
+    "@types/jest": "^24.9.1",
     "@types/lodash": "^4.14.168",
     "@types/qs": "^6.9.6",
     "@types/react": "^17.0.0",
@@ -47,7 +49,12 @@
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vitejs/plugin-react-refresh": "^1.3.1",
-    "babel-jest": "^26.6.3",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-named-asset-import": "^0.3.6",
+    "babel-preset-react-app": "^9.1.2",
+    "camelcase": "^6.2.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "^7.22.0",
@@ -61,8 +68,8 @@
     "jest": "^24.9.0",
     "jest-environment-jsdom-fourteen": "^1.0.1",
     "jest-enzyme": "^7.1.2",
-    "jest-resolve": "^26.6.2",
-    "jest-watch-typeahead": "^0.6.1",
+    "jest-resolve": "^24.9.0",
+    "jest-watch-typeahead": "^0.4.2",
     "less": "^4.1.1",
     "mocker": "^0.1.2",
     "mockjs": "^1.1.0",
@@ -71,5 +78,20 @@
     "typescript": "^4.1.2",
     "vite": "^2.1.0",
     "vite-plugin-imp": "^2.0.4"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
