@@ -21,9 +21,7 @@ export default defineConfig({
     proxy: proxy,
   },
   build: {
-    minify: false,
-    manifest: true,
-    sourcemap: true,
+    minify: true,
     outDir: 'build',
   },
   plugins: [
