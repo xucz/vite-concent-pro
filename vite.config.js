@@ -4,9 +4,6 @@ import * as fs from 'fs'
 import proxy from "./config/proxy"
 import reactRefresh from '@vitejs/plugin-react-refresh'
 import vitePluginImp from 'vite-plugin-imp'
-import { getBabelOutputPlugin } from '@rollup/plugin-babel'
-
-process.env.BABEL_ENV = 'development';
 
 // https://cn.vitejs.dev/config/
 export default defineConfig({
