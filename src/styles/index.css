@@ -1,0 +1,22 @@
+
+:root {
+  /* 站点主题颜色，会被 globalModelState里的颜色填入 */
+  --theme-color: transparent;
+  --theme-color-light: #91d5ff;
+  --theme-color-bg: #e6f8fe;
+  --theme-color-grey: #f0f2f5;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}

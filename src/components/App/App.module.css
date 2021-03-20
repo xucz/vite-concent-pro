@@ -1,0 +1,42 @@
+.header {
+  z-index: 88;
+  position: relative;
+}
+
+.headerSetting {
+  position: absolute;
+  right: 22px;
+  top: 23px;
+  font-size: 19px;
+}
+
+
+.userIconWrap {
+  position: absolute;
+  min-width: 100px;
+  right: 52px;
+  font-size: 15px;
+}
+
+
+.headerSetting:hover {
+  cursor: pointer;
+}
+
+.siderWrap {
+  position: fixed;
+  padding-top: 64px;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  top: 0;
+}
+
+.contentWrap {
+  position: relative;
+  background: #fff;
+  /* background: blue; */
+  padding: 24px;
+  margin: 0;
+  min-height: calc(100vh - 152px);
+}

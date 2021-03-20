@@ -1,0 +1,30 @@
+.diItemWrap {
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  margin: 2px 10px 2px 0;
+}
+
+/* 可被 extraStyle.title 覆盖 */
+.diItemTitle {
+  display: inline-block;
+  text-align: right;
+  padding-right: 10px;
+  font-weight: 500;
+  width: 120px;
+  vertical-align: top;
+  line-height: 30px;
+}
+
+.diItemSwitchWrap {
+  width: 50px;
+  vertical-align: top;
+  line-height: 30px;
+}
+
+
+.diItemError {
+  color: red;
+  margin-top: -10px;
+  font-size: 14px;
+}

@@ -1,0 +1,65 @@
+.stepWrap {
+  /* width: 30px; */
+  margin: 0 10px;
+  display: inline-block;
+  font-size: 19px;
+}
+
+.stepLabel {
+  /* width: 30px; */
+  padding-top: 16px;
+  text-align: right;
+  transform: translateX(15px);
+}
+
+
+.stepBase {
+  font-size: 32px;
+  line-height: 64px;
+  width: 64px;
+  height: 64px;
+}
+
+.stepDone {
+  border: 1px solid var(--theme-color);
+  background-color: var(--theme-color-grey);
+  color: var(--theme-color);
+  composes: stepBase;
+}
+
+.stepEditing {
+  background-color: var(--theme-color);
+  color: white;
+  composes: stepBase;
+}
+
+.stepOnceEditing {
+  composes: stepDone;
+}
+
+.stepUnstart {
+  color: #999999;
+  border: 1px solid #999999;
+  background-color: var(--theme-color-grey);
+  composes: stepBase;
+}
+
+.stepLine {
+  width: 160px;
+  height: 1px;
+  margin: 0 16px 0 0;
+  display: inline-block;
+  background-color: #999999;
+}
+
+.stepLineActive {
+  composes: stepLine;
+  background-color: var(--theme-color);
+}
+
+.stepNoLine {
+  width: 50px;
+  height: 1px;
+  margin: 0 16px 0 0;
+  display: inline-block;
+}

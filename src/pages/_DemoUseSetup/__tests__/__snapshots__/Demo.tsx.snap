@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Demo Render generate Demo snapshot 1`] = `
+<Memo(DemoPageTodoList)
+  history={Object {}}
+  location={Object {}}
+  match={Object {}}
+>
+  <DemoUseSetup>
+    <div>
+      <input
+        onChange={[Function]}
+        value="xx"
+      />
+      <h1>
+        reverse: 
+        xx
+      </h1>
+      <h1>
+        2
+      </h1>
+      <Button
+        onClick={[Function]}
+        type="primary"
+      >
+        <Wave>
+          <button
+            className="ant-btn ant-btn-primary"
+            onClick={[Function]}
+            type="button"
+          >
+            <LoadingIcon
+              existIcon={false}
+              loading={false}
+              prefixCls="ant-btn"
+            >
+              <CSSMotion
+                motionName="ant-btn-loading-icon-motion"
+                onAppearActive={[Function]}
+                onAppearStart={[Function]}
+                onEnterActive={[Function]}
+                onEnterStart={[Function]}
+                onLeaveActive={[Function]}
+                onLeaveStart={[Function]}
+                removeOnLeave={true}
+                visible={false}
+              >
+                <DomWrapper />
+              </CSSMotion>
+            </LoadingIcon>
+            <span
+              key=".0"
+            >
+              toogleIsOk true
+            </span>
+          </button>
+        </Wave>
+      </Button>
+    </div>
+  </DemoUseSetup>
+</Memo(DemoPageTodoList)>
+`;

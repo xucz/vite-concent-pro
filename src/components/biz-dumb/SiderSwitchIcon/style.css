@@ -1,0 +1,37 @@
+
+
+.ccpro-drawer__icon {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  color: #fff;
+  width: 1px;
+  height: 30px;
+  background: transparent;
+  border-color: transparent var(--theme-color) transparent transparent;
+  border-style: solid;
+  border-width: 15px 20px 15px 0;
+  box-sizing: content-box!important;
+  cursor: pointer;
+  transform: rotate(180deg);
+}
+
+.ccpro-drawer__icon span {
+  position: absolute;
+  right: -10px;
+  bottom: 4px
+}
+
+.ccpro-drawer__anticon {
+  display: inline-block;
+  color: inherit;
+  font-style: normal;
+  line-height: 0;
+  text-align: center;
+  text-transform: none;
+  vertical-align: -.125em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale
+}
+
