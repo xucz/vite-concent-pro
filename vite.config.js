@@ -24,7 +24,7 @@ export default defineConfig({
     proxy: proxy, // 代理
   },
   build: {
-    minify: false, // 是否进行压缩,boolean | 'terser' | 'esbuild',默认使用terser
+    minify: 'terser', // 是否进行压缩,boolean | 'terser' | 'esbuild',默认使用terser
     manifest: false, // 是否产出maifest.json
     sourcemap: false, // 是否产出soucemap.json
     outDir: 'build', // 产出目录
