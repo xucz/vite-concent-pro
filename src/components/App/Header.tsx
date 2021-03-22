@@ -74,7 +74,7 @@ function AppHeader() {
         <Blank width="8px" />
         {st.userName}
       </div>
-      <Popover placement="bottomLeft" content={uiContent} title="主题设置">
+      <Popover placement="bottomLeft" content={uiContent} title="主题设置" trigger="click">
         <SettingOutlined className={styles.headerSetting} style={{ color: gcu.headerStyle.color }} />
       </Popover>
     </Layout.Header>

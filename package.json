@@ -1,6 +1,6 @@
 {
   "name": "vite-concent-pro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
