@@ -12,7 +12,7 @@ let ins = null as any;
  */
 describe('Demo Render', () => {
   beforeAll(() => {
-    const mockRouterProps = {history: {} as any, location: {} as any, match: {} as any};
+    const mockRouterProps = { history: {} as any, location: {} as any, match: {} as any };
     ins = mount(<Demo {...mockRouterProps} />);
   });
 

@@ -7,8 +7,8 @@ import styles from './styles.module.css';
 import { IDiCompPropsBase } from './types';
 import { defaultSettings as d } from './common';
 
-const {Option} = Select;
-const stPre = {color: 'red', display: 'inline-block', verticalAlign: 'top'};
+const { Option } = Select;
+const stPre = { color: 'red', display: 'inline-block', verticalAlign: 'top' };
 const MySelect = styled(Select)`
   .ant-select-selection-placeholder{
     color: #08132E;
@@ -41,7 +41,7 @@ export default function DiSelect(props: IProps) {
     hasEmpty, emptyLabel = '不限', emptyValue = '', smartEmpty = false,
     extraStyle = {}, placeholder = '', mode, error = '',
   } = props;
-  const style = {display: 'inline-block'};
+  const style = { display: 'inline-block' };
   if (block) style.display = 'block';
   const uiRequred = <pre style={stPre}>{required ? '* ' : '  '}</pre>;
 
@@ -51,7 +51,7 @@ export default function DiSelect(props: IProps) {
     input: inputSt = d.inputStyle,
     inputSize = d.inputSize,
   } = extraStyle;
-  const mergedItemSt = {...style, ...itemSt}
+  const mergedItemSt = { ...style, ...itemSt }
 
   let uiEmtpy = '' as React.ReactNode;
   if (hasEmpty) {
@@ -69,7 +69,7 @@ export default function DiSelect(props: IProps) {
     uiError = (
       <div className={styles.diItemError}>
         <span className={styles.diItemTitle} style={titleSt}></span>
-        <div style={{display: 'inline-block', wordWrap: 'break-word', ...inputSt}}>{error}</div>
+        <div style={{ display: 'inline-block', wordWrap: 'break-word', ...inputSt }}>{error}</div>
       </div>
     )
   }
@@ -80,7 +80,7 @@ export default function DiSelect(props: IProps) {
         {uiRequred}{title}
       </span>
       <MySelect mode={mode} value={value} size={inputSize} style={inputSt} onChange={onChange}
-                placeholder={placeholder} onSearch={onSearch} showArrow
+        placeholder={placeholder} onSearch={onSearch} showArrow
       >
         {uiEmtpy}
         {data.map((v: any, i: number) => <Option key={i} value={v.value}>{v.label}</Option>)}

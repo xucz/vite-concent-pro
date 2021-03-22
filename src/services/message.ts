@@ -49,7 +49,7 @@ function _callMessageMethod(method: Methods, cb: (arg: any) => void, content: Re
  * 通用的提示方式，动态传参决定提示类型
  */
 export function call(method: Methods, content: React.ReactNode, displayDuration: DisplayDuration = 3,
-                     noDupDuration: NoDupDuration = NO_DUP_DURATION
+  noDupDuration: NoDupDuration = NO_DUP_DURATION
 ) {
   return new Promise((resolve) => {
     _callMessageMethod(method, resolve, content, displayDuration, noDupDuration);

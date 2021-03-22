@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { SettingsType, StateType, useConcent } from 'concent';
+import { useConcent, SettingsType, StateType } from 'concent';
 import { CtxDeS, MouseEv } from 'types/store';
 import CounterWithModel from 'components/_demos/CounterWithModel';
 import D0Module from 'components/_demos/D0Module';
@@ -35,14 +35,14 @@ function setup(ctx: CtxPre) {
 
   return {
     changeSelectedKey: (e: MouseEv) => {
-      const {key: selectedKey} = e.currentTarget.dataset;
-      ctx.setState({selectedKey});
+      const { key: selectedKey } = e.currentTarget.dataset;
+      ctx.setState({ selectedKey });
     },
   };
 }
 
 function ADemoPage(props: RouteComponentProps) {
-  const {settings: se, state} = useConcent<{}, Ctx>({setup});
+  const { settings: se, state } = useConcent<{}, Ctx>({ setup });
   const Comp = key2comp[state.selectedKey];
 
   const uiBtns = Object.keys(key2comp).map(key => {
@@ -53,7 +53,7 @@ function ADemoPage(props: RouteComponentProps) {
     <div>
       <h1>at path {props.location.pathname}</h1>
       {uiBtns}
-      <Comp/>
+      <Comp />
     </div>
   );
 }

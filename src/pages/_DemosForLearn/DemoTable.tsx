@@ -1,5 +1,7 @@
+
+
 import React from 'react';
-import { SettingsType, useConcent } from 'concent';
+import { useConcent, SettingsType } from 'concent';
 import { ccReducer } from 'services/concent';
 import GeneralTable from 'components/smart/GeneralTable';
 import { CtxDe } from 'types/store';
@@ -37,12 +39,12 @@ function setup(ctx: CtxPre) {
 }
 
 function DemoTable() {
-  const {settings: se} = useConcent<{}, Ctx>({setup});
+  const { settings: se } = useConcent<{}, Ctx>({ setup });
 
   return (
     <div>
       <button onClick={se.refreshTable}>refresh</button>
-      <GeneralTable tid="todoTable" columns={se.columns} fetchFn={se.fetchList}/>
+      <GeneralTable tid="todoTable" columns={se.columns} fetchFn={se.fetchList} />
     </div>
   );
 }

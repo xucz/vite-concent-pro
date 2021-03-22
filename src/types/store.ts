@@ -1,15 +1,7 @@
 import {
-  GetRootComputed,
-  GetRootReducer,
-  GetRootReducerCaller,
-  GetRootReducerGhost,
-  GetRootState,
-  IActionCtx,
-  IAnyObj,
-  ICtx,
-  MODULE_DEFAULT,
-  MODULE_GLOBAL,
-  MODULE_VOID,
+  ICtx, IActionCtx, IAnyObj,
+  MODULE_VOID, MODULE_DEFAULT, MODULE_GLOBAL,
+  GetRootState, GetRootReducer, GetRootComputed, GetRootReducerCaller, GetRootReducerGhost,
 } from 'concent';
 import { Models } from './mods';
 

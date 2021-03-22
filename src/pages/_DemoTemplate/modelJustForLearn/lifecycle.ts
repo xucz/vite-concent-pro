@@ -1,3 +1,4 @@
+
 /*
 |--------------------------------------------------------------------------
 | 定义模块的lifecyle
@@ -5,6 +6,7 @@
 | 文档:  https://concentjs.github.io/concent-doc/guide/concept-module-lifecycle
 */
 import { IDispatch } from 'concent';
+import * as reducer from './reducer';
 
 
 // 异步状态初始化函数

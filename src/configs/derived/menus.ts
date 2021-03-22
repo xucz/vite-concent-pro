@@ -1,3 +1,4 @@
+
 /**
  * 由 configs/menus 派生出的数据
  */
@@ -52,7 +53,7 @@ function calcMenus() {
       homePageFullPath = menuItem.path;
     }
   });
-  return {path2menuGroup, path2menuItem, homePageFullPath};
+  return { path2menuGroup, path2menuItem, homePageFullPath };
 }
 
 const ret = calcMenus();

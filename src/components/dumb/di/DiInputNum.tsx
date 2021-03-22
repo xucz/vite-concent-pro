@@ -7,8 +7,8 @@ import { IDiCompPropsBase } from './types';
 import styles from './styles.module.css';
 import { defaultSettings as d } from './common';
 
-const stPre = {color: 'red', display: 'inline-block', verticalAlign: 'top'};
-const stIBtn = {position: 'absolute', right: '-38px', top: '0px', zIndex: 999} as const;
+const stPre = { color: 'red', display: 'inline-block', verticalAlign: 'top' };
+const stIBtn = { position: 'absolute', right: '-38px', top: '0px', zIndex: 999 } as const;
 
 interface IProps extends IDiCompPropsBase {
   value: number,
@@ -24,16 +24,15 @@ interface IProps extends IDiCompPropsBase {
   min?: number,
 }
 
-const noop = () => {
-};
+const noop = () => { };
 
 export default function DiInput(props: IProps) {
   const {
     title, value, onChange, onEnter, block, disabled, required = true, extraStyle = {},
-    interactiveCb, interactiveBtnLoading = false, placeholder = '',
+    interactiveCb, interactiveLabel = '搜索', interactiveBtnLoading = false, placeholder = '',
     error, formatter, min = 0,
   } = props;
-  const style = {display: 'inline-block'};
+  const style = { display: 'inline-block' };
   if (block) style.display = 'block';
 
   const onKeyDown = onEnter ? (e: KeyboardEv) => {
@@ -47,12 +46,12 @@ export default function DiInput(props: IProps) {
     input: inputSt = d.inputStyle,
     inputSize = d.inputSize,
   } = extraStyle;
-  const mergedItemSt = {...style, ...itemSt}
+  const mergedItemSt = { ...style, ...itemSt }
 
   let uiInteractiveBtn = '' as React.ReactNode;
   if (interactiveCb) uiInteractiveBtn = (
-    <Button type="primary" icon={<ReloadOutlined/>} onClick={interactiveCb}
-            loading={interactiveBtnLoading} shape="circle" style={stIBtn}/>
+    <Button type="primary" icon={<ReloadOutlined />} onClick={interactiveCb}
+      loading={interactiveBtnLoading} shape="circle" style={stIBtn} />
   );
 
   let uiError = '' as React.ReactNode;
@@ -60,7 +59,7 @@ export default function DiInput(props: IProps) {
     uiError = (
       <div className={styles.diItemError}>
         <span className={styles.diItemTitle} style={titleSt}></span>
-        <div style={{display: 'inline-block', wordWrap: 'break-word', ...inputSt}}>{error}</div>
+        <div style={{ display: 'inline-block', wordWrap: 'break-word', ...inputSt }}>{error}</div>
       </div>
     )
   }
@@ -71,7 +70,7 @@ export default function DiInput(props: IProps) {
         {uiRequred}{title}
       </span>
       <InputNumber disabled={disabled} value={value} onChange={onChange} onKeyDown={onKeyDown}
-                   size={inputSize} style={inputSt} placeholder={placeholder} formatter={formatter} min={min}/>
+        size={inputSize} style={inputSt} placeholder={placeholder} formatter={formatter} min={min} />
       {uiInteractiveBtn}
       {uiError}
     </div>

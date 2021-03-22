@@ -11,7 +11,7 @@ import { dispatch } from 'concent';
 describe('Demo model', () => {
   test('reducer.clear', async () => {
     const ret = await dispatch(rd.clear);
-    expect(ret).toMatchObject({value: 1});
+    expect(ret).toMatchObject({ value: 1 });
   });
 
   test('reducer.clear way2', async () => {

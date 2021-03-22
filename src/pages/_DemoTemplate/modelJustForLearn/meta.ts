@@ -2,20 +2,10 @@ import state, { St as ModuleState } from './state';
 import * as computed from './computed';
 import * as reducer from './reducer';
 import * as lifecycle from './lifecycle';
-import { RootCu, RootState } from 'types/store';
+import { RootState, RootCu } from 'types/store';
 import {
-  ComputedValType,
-  getComputed,
-  getState,
-  IAnyObj,
-  ICtxBase,
-  IModActionCtx,
-  IReducerFn,
-  IRefCtxM,
-  ReducerCallerParams,
-  ReducerType,
-  SettingsType,
-  StateType,
+  IModActionCtx, IRefCtxM, ReducerCallerParams, IReducerFn, IAnyObj,
+  getComputed, getState, ComputedValType, StateType, ReducerType, ICtxBase, SettingsType,
 } from 'concent';
 import { makeUseModel, makeUseModelWithSetup, makeUseModelWithSetupCuf } from 'concent-utils';
 
@@ -33,7 +23,7 @@ export const modelDesc = {
   ghosts: ['loading'] as const,
 };
 
-export const model = {[moduleName]: modelDesc};
+export const model = { [moduleName]: modelDesc };
 
 export type ModelDesc = typeof modelDesc;
 
@@ -56,7 +46,7 @@ export type RootInfo = { state: RootState, computed: RootCu };
 /** 用于描述 reducer 函数第3位参数 actionCtx 的类型 */
 export type IAC = IModActionCtx<RootInfo, ModelDesc>;
 
-/**
+/** 
  * 用于描述 setup 函数的第一位参数类型
  * 如需描述props的类型，可在组件文件内部使用 CtxPre 时透传 Props 类型
  */

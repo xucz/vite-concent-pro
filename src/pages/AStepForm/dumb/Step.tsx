@@ -33,7 +33,7 @@ const status2StepStyle: any = {
     labelColor: '#999999',
   }
 };
-const labelLen2offset = {3: '-1px', 4: '5px', 5: '17px'} as any;
+const labelLen2offset = { 3: '-1px', 4: '5px', 5: '17px' } as any;
 
 interface IStepProps {
   num?: string;
@@ -44,13 +44,12 @@ interface IStepProps {
   status: string;
   onClick?: () => void;
 }
-
-export default function Step({num = '1', label, labelOffset = '', line = true, status, onClick}: IStepProps) {
-  let {avatarCls, lineCls, labelColor} = status2StepStyle[status];
+export default function Step({ num = '1', label, labelOffset = '', line = true, status, onClick }: IStepProps) {
+  let { avatarCls, lineCls, labelColor } = status2StepStyle[status];
   if (!line) lineCls = styles.stepNoLine;
   let numLabel = num;
   if (status === 'finished') numLabel = '✓';
-  const labelStyle = {color: labelColor, transform: ''};
+  const labelStyle = { color: labelColor, transform: '' };
   if (labelOffset) labelStyle.transform = `translateX(${labelOffset})`;
   else if (label) {
     const offset = labelLen2offset[label.length];

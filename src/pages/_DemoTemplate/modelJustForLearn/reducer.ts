@@ -1,16 +1,16 @@
 import { callTarget } from 'concent-utils';
 import * as timerUtil from 'utils/timer';
 import { VoidPayload } from 'types/store';
-import { CallerParams, IAC, ReducerFn, St } from './meta';
+import { IAC, St, CallerParams, ReducerFn } from './meta';
 
 export function forCopy(payload: VoidPayload, moduleState: St, ac: IAC) {
   console.log('call ac.setState or ac.dispatch when needed', ac.setState);
 }
 
 export function tryCutDesc(payload: VoidPayload, moduleState: St) {
-  const {desc} = moduleState;
+  const { desc } = moduleState;
   if (desc.length > 8) {
-    return {desc: desc.substr(0, 8)};
+    return { desc: desc.substr(0, 8) };
   }
 }
 
@@ -21,10 +21,10 @@ export async function tryAsyncCutDescWithLoading(payload: VoidPayload, moduleSta
 
 // 在 meta.js 里已注册为ghost函数
 export async function loading(callerParams: CallerParams | [ReducerFn, any], moduleState: St, ac: IAC) {
-  await ac.setState({loading: true});
+  await ac.setState({ loading: true });
   await timerUtil.delay();
   await callTarget(callerParams, ac)
-  return {loading: false};
+  return { loading: false };
 }
 
 export function initState() {

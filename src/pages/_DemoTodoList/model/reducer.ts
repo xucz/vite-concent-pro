@@ -10,10 +10,9 @@ interface FetchListPayload {
   current: number,
   pageSize: number,
 }
-
-export async function fetchList({current, pageSize}: FetchListPayload, moduleState: St) {
+export async function fetchList({ current, pageSize }: FetchListPayload, moduleState: St) {
   const todos = await http.get('/api/todos');
-  return {pageList: todos, total: 1000};
+  return { pageList: todos, total: 1000 };
 }
 
 export function foo() {
@@ -22,10 +21,10 @@ export function foo() {
 
 export function clear() {
   console.log('clear');
-  return {value: 1};
+  return { value: 1 };
 }
 
 export function addBig(payload: VoidPayload, moduleState: St) {
-  const {bigValue} = moduleState;
-  return {bigValue: bigValue + 1};
+  const { bigValue } = moduleState;
+  return { bigValue: bigValue + 1 };
 }

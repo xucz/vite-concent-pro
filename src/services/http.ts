@@ -4,7 +4,6 @@ import qs from 'qs';
 import axios from 'axios';
 import * as messageService from './message';
 import * as objUtil from 'utils/obj';
-
 // import resData from 'assets/response-data';
 
 export interface IReqOptions {
@@ -21,7 +20,7 @@ export interface IReqOptions {
    * default = true
    */
   check?: boolean,
-  /**
+    /**
    * default = true
    * 当check为true时生效，是否alert提示错误信息
    */
@@ -29,7 +28,6 @@ export interface IReqOptions {
 }
 
 type DataParams = Record<string, any> | null;
-
 interface MultiItem {
   url: string;
   data: DataParams;
@@ -48,46 +46,30 @@ const getXFormOptions = () => ({
   withCredentials: true,
 });
 const generalOptions = {
-  headers: {'Content-Type': 'application/json'},
+  headers: { 'Content-Type': 'application/json' },
   withCredentials: true,
   mockData: null as any,
-
-  // replyReceived: (reply, m) => {
-  //   // console.log('reply.config.url', reply.config.url);
-  //   cute.post('/collectData', { data: reply.data, method: m, url: reply.config.url }, {
-  //     headers: { 'Content-Type': 'application/json' },
-  //     withCredentials: true,
-  //   });
-  // }
 };
 
-// 测试模式，拦截请求，直接响应mock数据
-// if (process.env.TEST_MODE === '1') {
-//   generalOptions.mockData = (method: string, url: string, inputData: any) => {
-//     const key = `${method}${url}`;
-//     // console.log(`return mock data for ${key}`);
-//     return Promise.resolve({ data: resData[key] });
-//   }
-// }
 
-function seperateOptions(options: any = {}) {
+function seperateOptions(options:any = {}) {
   const {
     returnLogicData, defaultValue = '', check = true, alertErrorMsg = true,
     failStrategy = cute.const.KEEP_ALL_BEEN_EXECUTED, ...cuteOptions
   } = options;
   // cute-http的调用相关可选参数
   cuteOptions.failStrategy = failStrategy;
-  return {logicOptions: {returnLogicData, defaultValue, check, alertErrorMsg}, cuteOptions};
+  return { logicOptions: { returnLogicData, defaultValue, check, alertErrorMsg }, cuteOptions };
 }
 
 const checkCode = (axiosReply: any, url = '', checkOptions: IReqOptions = {}) => {
-  const {returnLogicData = true, check = true} = checkOptions;
+  const { returnLogicData = true, check = true } = checkOptions;
 
-  const {statusCode = 0} = axiosReply;
+  const { statusCode = 0 } = axiosReply;
   const httpResponse = axiosReply.data || axiosReply;
 
   if (statusCode >= 400) throw new Error(`服务器内部错误${statusCode}`);
-  const {status = '0', message = '接口格式错误', response, code, data, msg} = httpResponse;
+  const { status = '0', message = '接口格式错误', response, code, data, msg } = httpResponse;
   const errMsg = msg || message;
 
   let toReturn = null;
@@ -120,9 +102,6 @@ const attachPrefixAndData = (url: string, data: DataParams | '') => {
   const pureUrl = url.replace(/ /g, '');
   let prefixedUrl = `${pureUrl}`;
 
-  // 此处可自定义一些其他规则修改 prefixedUrl
-  // 例如通过 process.env.
-
   if (data) {
     if (pureUrl.includes('?')) return `${prefixedUrl}&${qs.stringify(data)}`;
     return `${prefixedUrl}?${qs.stringify(data)}`;
@@ -144,11 +123,11 @@ function handleError(error: any, options: any, defaultValue: any) {
 }
 
 async function sendRequest(method: string, url: string, data?: DataParams, options = {}) {
-  const {logicOptions, cuteOptions} = seperateOptions(options);
-  const {returnLogicData, defaultValue = '', check = true} = logicOptions;
+  const { logicOptions, cuteOptions } = seperateOptions(options);
+  const { returnLogicData, defaultValue = '', check = true } = logicOptions;
 
   try {
-    const mergedOpt = {...generalOptions, ...cuteOptions};
+    const mergedOpt = { ...generalOptions, ...cuteOptions };
     let reply;
     if (method === 'get') {
       reply = await cute[method](attachPrefixAndData(url, data || ''), '', mergedOpt);
@@ -156,7 +135,7 @@ async function sendRequest(method: string, url: string, data?: DataParams, optio
       reply = await cute[method](attachPrefixAndData(url, ''), data, mergedOpt);
     }
 
-    return checkCode(reply, url, {returnLogicData, check});
+    return checkCode(reply, url, { returnLogicData, check });
   } catch (err) {
     return handleError(err, options, defaultValue);
   }
@@ -182,11 +161,11 @@ async function put(url: string, body?: DataParams, options?: IReqOptions) {
  * @param {*} options
  */
 async function sendXForm(method: string, url: string, data: DataParams, options = {}) {
-  const {logicOptions, cuteOptions} = seperateOptions(options);
-  const {returnLogicData, defaultValue = '', check = true} = logicOptions;
+  const { logicOptions, cuteOptions } = seperateOptions(options);
+  const { returnLogicData, defaultValue = '', check = true } = logicOptions;
   try {
     const xFormOptions = getXFormOptions();
-    const mergedOpt = {...xFormOptions, ...cuteOptions};
+    const mergedOpt = { ...xFormOptions, ...cuteOptions };
 
     let _data = data;
     if (objUtil.isObject(data)) {
@@ -199,7 +178,7 @@ async function sendXForm(method: string, url: string, data: DataParams, options 
     }
 
     const reply = await cute[method](attachPrefixAndData(url, ''), qs.stringify(_data), mergedOpt);
-    return checkCode(reply, url, {returnLogicData, check});
+    return checkCode(reply, url, { returnLogicData, check });
   } catch (err) {
     return handleError(err, options, defaultValue);
   }
@@ -214,27 +193,27 @@ async function xFormPut(url: string, data: DataParams, options = {}) {
 }
 
 async function multiGet(urls: string[], options: IReqOptions = {}) {
-  const {logicOptions, cuteOptions} = seperateOptions(options);
-  const {returnLogicData, defaultValue = '', check = true} = logicOptions;
+  const { logicOptions, cuteOptions } = seperateOptions(options);
+  const { returnLogicData, defaultValue = '', check = true } = logicOptions;
   try {
     delete options.returnLogicData;
     const _urls = urls.map(url => attachPrefixAndData(url, ''));
-    const replyList: any[] = await cute.multiGet(_urls, {...generalOptions, ...cuteOptions});
-    return replyList.map((r, idx) => checkCode(r, _urls[idx], {returnLogicData, check}));
+    const replyList: any[] = await cute.multiGet(_urls, { ...generalOptions, ...cuteOptions });
+    return replyList.map((r, idx) => checkCode(r, _urls[idx], { returnLogicData, check }));
   } catch (err) {
     return handleError(err, options, defaultValue);
   }
 }
 
 async function multiPost(items: MultiItem[], options: IReqOptions = {}) {
-  const {logicOptions, cuteOptions} = seperateOptions(options);
-  const {returnLogicData, defaultValue = '', check = true} = logicOptions;
+  const { logicOptions, cuteOptions } = seperateOptions(options);
+  const { returnLogicData, defaultValue = '', check = true } = logicOptions;
 
   try {
     delete options.returnLogicData;
     items.forEach(item => item.url = attachPrefixAndData(item.url, ''));
-    const replyList: any[] = await cute.multiPost(items, {...generalOptions, ...cuteOptions});
-    return replyList.map((r, idx) => checkCode(r, items[idx].url, {returnLogicData, check}));
+    const replyList: any[] = await cute.multiPost(items, { ...generalOptions, ...cuteOptions });
+    return replyList.map((r, idx) => checkCode(r, items[idx].url, { returnLogicData, check }));
   } catch (err) {
     return handleError(err, options, defaultValue);
   }
@@ -245,8 +224,8 @@ async function multiPost(items: MultiItem[], options: IReqOptions = {}) {
  * Content-Type 为 multipart/form-data
  */
 async function postFormData(url: string, data: DataParams, options: IReqOptions) {
-  const {logicOptions, cuteOptions} = seperateOptions(options);
-  const {returnLogicData, defaultValue = '', check = true} = logicOptions;
+  const { logicOptions, cuteOptions } = seperateOptions(options);
+  const { returnLogicData, defaultValue = '', check = true } = logicOptions;
   const finalUrl = attachPrefixAndData(url, '');
 
   const formData = new FormData();
@@ -262,11 +241,11 @@ async function postFormData(url: string, data: DataParams, options: IReqOptions)
     }
   });
 
-  const instance = axios.create({withCredentials: true});
+  const instance = axios.create({ withCredentials: true });
 
   try {
     const reply = await instance.post(finalUrl, formData, cuteOptions);
-    return checkCode(reply, url, {returnLogicData, check});
+    return checkCode(reply, url, { returnLogicData, check });
   } catch (err) {
     return handleError(err, options, defaultValue);
   }

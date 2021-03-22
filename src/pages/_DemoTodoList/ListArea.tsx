@@ -1,10 +1,13 @@
+
+
 import React from 'react';
 import { Button } from 'antd';
 import GeneralTable, { FetchFnParams } from 'components/smart/GeneralTable';
-import { CtxPre, useModelWithSetup } from './model/meta';
+import { useModelWithSetup } from './model/meta';
+import { CtxPre } from './model/meta';
 
 function setup(ctx: CtxPre) {
-  const {mr} = ctx;
+  const { mr } = ctx;
   return {
     columns: [
       {
@@ -33,11 +36,11 @@ function setup(ctx: CtxPre) {
 }
 
 function ListArea() {
-  const {settings: se} = useModelWithSetup(setup);
+  const { settings: se } = useModelWithSetup(setup);
   return (
     <div>
       <Button id="refreshBtn" onClick={se.refreshTable}>refresh</Button>
-      <GeneralTable tid="todoTable" columns={se.columns} fetchFn={se.fetchList}/>
+      <GeneralTable tid="todoTable" columns={se.columns} fetchFn={se.fetchList} />
     </div>
   );
 }

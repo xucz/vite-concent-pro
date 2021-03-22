@@ -5,7 +5,7 @@ import { IDiCompPropsBase } from './types';
 import styles from './styles.module.css';
 import { defaultSettings as d } from './common';
 
-const stPre = {color: 'red', display: 'inline-block', verticalAlign: 'top'};
+const stPre = { color: 'red', display: 'inline-block', verticalAlign: 'top' };
 
 interface IProps extends IDiCompPropsBase {
   value: boolean,
@@ -20,7 +20,7 @@ export default function DiInput(props: IProps) {
     title, value, onChange, block, disabled, required = true, extraStyle = {},
     error,
   } = props;
-  const style = {display: 'inline-block'};
+  const style = { display: 'inline-block' };
   if (block) style.display = 'block';
 
   const uiRequred = <pre style={stPre}>{required ? '* ' : '  '}</pre>;
@@ -28,16 +28,17 @@ export default function DiInput(props: IProps) {
   const {
     item: itemSt = {},
     title: titleSt = {},
+    input: inputSt = d.inputSwitchStyle,
     inputSize = d.inputSize,
   } = extraStyle;
-  const mergedItemSt = {...style, ...itemSt}
+  const mergedItemSt = { ...style, ...itemSt }
 
   let uiError = '' as React.ReactNode;
   if (error) {
     uiError = (
       <div className={styles.diItemError}>
         <span className={styles.diItemTitle} style={titleSt}></span>
-        <div style={{display: 'inline-block', wordWrap: 'break-word', ...d.inputStyle}}>{error}</div>
+        <div style={{ display: 'inline-block', wordWrap: 'break-word', ...d.inputStyle }}>{error}</div>
       </div>
     )
   }
@@ -48,7 +49,7 @@ export default function DiInput(props: IProps) {
         {uiRequred}{title}
       </span>
       <span className={styles.diItemSwitchWrap}>
-        <Switch disabled={disabled} checked={value} onChange={onChange} size={inputSize}/>
+        <Switch disabled={disabled} checked={value} onChange={onChange} size={inputSize} />
       </span>
       {uiError}
     </div>

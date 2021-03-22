@@ -1,18 +1,9 @@
 import {
-  ComputedValType,
-  getComputed,
-  getState,
-  IAnyObj,
-  ICtxBase,
-  IModActionCtx,
-  IReducerFn,
-  IRefCtxM,
-  ReducerCallerParams,
-  SettingsType,
-  StateType
+  getComputed, getState, ComputedValType, StateType,
+  IModActionCtx, IRefCtxM, ReducerCallerParams, IReducerFn, IAnyObj, ICtxBase, SettingsType
 } from 'concent';
 import { makeUseModel, makeUseModelWithSetup, makeUseModelWithSetupCuf } from 'concent-utils';
-import { RootCu, RootState } from 'types/store';
+import { RootState, RootCu } from 'types/store';
 import state, { St as ModuleState } from './state';
 import * as computed from './computed';
 import * as reducer from './reducer';
@@ -28,7 +19,7 @@ export const modelDesc = {
   ghosts: ['loading'] as const, // 仅当需要ghost功能时，才配置此项，否则可以删掉
 };
 
-export const model = {[moduleName]: modelDesc};
+export const model = { [moduleName]: modelDesc };
 
 export type ModelDesc = typeof modelDesc;
 export type ModuleName = typeof moduleName;

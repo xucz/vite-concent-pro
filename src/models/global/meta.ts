@@ -1,23 +1,14 @@
+
 import {
-  ComputedValType,
-  cst,
-  getComputed,
-  getState,
-  IAnyObj,
-  ICtxBase,
-  IModActionCtx,
-  IReducerFn,
-  IRefCtxM,
-  ReducerCallerParams,
-  SettingsType,
-  StateType,
+  IModActionCtx, IRefCtxM, ReducerCallerParams, IReducerFn, IAnyObj, cst,
+  getComputed, getState, ComputedValType, StateType, SettingsType, ICtxBase,
 } from 'concent';
 import { makeUseModel, makeUseModelWithSetup, makeUseModelWithSetupCuf } from 'concent-utils';
 import state, { St as ModuleState } from './state';
 import * as computed from './computed';
 import * as reducer from './reducer';
 import * as lifecycle from './lifecycle';
-import { RootCu, RootState } from 'types/store';
+import { RootState, RootCu } from 'types/store';
 
 export const moduleName = cst.MODULE_GLOBAL;
 
@@ -28,7 +19,7 @@ export const modelDesc = {
   lifecycle,
 };
 
-export const model = {[moduleName]: modelDesc};
+export const model = { [moduleName]: modelDesc };
 
 export type ModelDesc = typeof modelDesc;
 export type ModuleName = typeof moduleName;

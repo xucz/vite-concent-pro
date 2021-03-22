@@ -1,3 +1,4 @@
+
 export interface IDiCompPropsBase {
   block?: boolean,
   disabled?: boolean,

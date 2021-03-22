@@ -1,3 +1,4 @@
+
 const cachedAppName = localStorage.getItem('someBaseNameKey') || '';
 const cachedApiHost = localStorage.getItem('someApiHostKey');
 
@@ -31,7 +32,7 @@ export function attachApiHost(url: string) {
  * <basename>/xxx/yyy ---> /xxx/yyy
  */
 export function getRelativeRootPath() {
-  const {pathname} = window.location;
+  const { pathname } = window.location;
   const basename = getBasename();
   let targetPathname = pathname;
 

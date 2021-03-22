@@ -1,3 +1,4 @@
+
 export function okeys<T extends Record<string, any>>(map: T) {
   // 外部需要自己 as (keyof T)[]
   return Object.keys(map);
@@ -72,7 +73,6 @@ interface NullDef {
   checkObjValues?: boolean;
   emptyArrIsNull?: boolean;
 }
-
 /**
  *
  * @param value
@@ -185,12 +185,12 @@ export function filterList<Item, NewItem>(list: Item[], filterCb: (item: Item) =
 }
 
 /**
- * 对比新老对象，提取出新对象里发生变化的部分并单独返回
- * 注意此函数只做浅比较
- * @param {object} oldObj
- * @param {object} newObj
- * @param {string} [fixedKeys=[]] - 必定要包含的key
- */
+  * 对比新老对象，提取出新对象里发生变化的部分并单独返回
+  * 注意此函数只做浅比较
+  * @param {object} oldObj
+  * @param {object} newObj
+  * @param {string} [fixedKeys=[]] - 必定要包含的key
+  */
 export function extractChangedPart(oldObj: Record<string, any>, newObj: Record<string, any>, fixedKeys: string[] = []) {
   const changed = {} as Record<string, any>;
   const oldObjKeys = okeys(oldObj);
@@ -266,7 +266,7 @@ export function getObjDepth(obj: Record<string, any>) {
     }
   };
 
-  const depthRecorder: DepthRecorder = {num: 1};
+  const depthRecorder: DepthRecorder = { num: 1 };
   tryDectectObjDepth(obj, 1, depthRecorder);
   return depthRecorder.num;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Col, Row } from 'antd';
+import { Card, Button, Row, Col } from 'antd';
 import { DiInput, DiSelect } from 'components/dumb/di';
 import { EmptyView, VerticalBlank } from 'components/dumb/general';
 import { CtxPre, useModelWithSetup } from './model/meta';
@@ -7,9 +7,9 @@ import { CtxPre, useModelWithSetup } from './model/meta';
 function Title() {
   const openPasssTab = () => window.open('https://www.baidu.com/s?wd=appid');
   return (
-    <div>
+    <div >
       step1:基础信息
-      <Button onClick={openPasssTab} style={{float: 'right'}} type="primary">
+      <Button onClick={openPasssTab} style={{ float: 'right' }} type="primary">
         获取目标appID
       </Button>
     </div>
@@ -32,49 +32,45 @@ interface IProps {
 }
 
 function BasicInfo(props: IProps) {
-  const {sync, state, settings: se, mr, moduleComputed: mcu} = useModelWithSetup(setup);
-  const {errors} = state;
-  if (state.step !== props.step) return <EmptyView/>;
+  const { sync, state, settings: se, mr, moduleComputed: mcu } = useModelWithSetup(setup);
+  const { errors } = state;
+  if (state.step !== props.step) return <EmptyView />;
 
   return (
-    <Card title={<Title/>}>
+    <Card title={<Title />}>
       <Row>
         <Col span={8}>
           <DiInput title="appid:" value={state.appId} onChange={sync('appId')} tooltip={se.appIdTip}
-                   interactiveCb={mr.fetchAppIdInfo} interactiveBtnLoading={state.checkAppIdBtnLoading}
-                   error={errors.appId}
+            interactiveCb={mr.fetchAppIdInfo} interactiveBtnLoading={state.checkAppIdBtnLoading} error={errors.appId}
           />
         </Col>
         <Col span={8}>
-          <DiInput disabled title="appDetail:" value={state.appDetail} onChange={sync('appDetail')}
-                   error={errors.appDetail}/>
+          <DiInput disabled title="appDetail:" value={state.appDetail} onChange={sync('appDetail')} error={errors.appDetail} />
         </Col>
       </Row>
-      <VerticalBlank/>
+      <VerticalBlank />
       <Row>
         <Col span={8}>
-          <DiInput title="displayName:" value={state.displayName} onChange={sync('displayName')}
-                   error={errors.displayName}
-                   placeholder={se.displayNamePlaceHolder} tooltip={se.displayNameTip}
+          <DiInput title="displayName:" value={state.displayName} onChange={sync('displayName')} error={errors.displayName}
+            placeholder={se.displayNamePlaceHolder} tooltip={se.displayNameTip}
           />
         </Col>
         <Col span={8}>
-          <DiInput title="申请人:" value={state.creator} onChange={sync('creator')} error={errors.creator}/>
+          <DiInput title="申请人:" value={state.creator} onChange={sync('creator')} error={errors.creator} />
         </Col>
       </Row>
-      <VerticalBlank/>
+      <VerticalBlank />
       <Row>
         <Col span={12}>
           <DiSelect title="负责人:" data={mcu.staffDataList} value={state.monitor} onChange={sync('monitor')}
-                    error={errors.monitor} onSearch={mr.searchMonitor} placeholder="选择多个负责人" mode="multiple"
+            error={errors.monitor} onSearch={mr.searchMonitor} placeholder="选择多个负责人" mode="multiple"
           />
         </Col>
       </Row>
-      <VerticalBlank/>
+      <VerticalBlank />
       <Row>
         <Col span={12}>
-          <DiInput title="简介:" value={state.comment} onChange={sync('comment')} placeholder={se.intro}
-                   error={errors.comment}/>
+          <DiInput title="简介:" value={state.comment} onChange={sync('comment')} placeholder={se.intro} error={errors.comment} />
         </Col>
       </Row>
     </Card>

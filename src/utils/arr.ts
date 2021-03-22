@@ -1,9 +1,11 @@
+
+
 /**
  * 将list转为map
  * @param list
  * @param keyNameOrFn 选择哪个key的值作为map的key，也可以是一个动态生成key的函数
  * @param getValue
- */
+*/
 export function toMap<T, V extends any = T>(list: T[], keyNameOrFn: keyof T | ((value: T) => string), getValue?: (value: T) => any): Record<string, V> {
   const map = {} as Record<string, V>;
   if (!list) return map;

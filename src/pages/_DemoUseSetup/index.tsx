@@ -4,7 +4,7 @@ import UseSteup from 'components/_demos/UseSteup';
 
 function DemoPageTodoList(props: RouteComponentProps) {
   return (
-    <UseSteup/>
+    <UseSteup />
   );
 }
 

@@ -1,5 +1,5 @@
 import { T_DEMO } from 'configs/c2Mods';
-import { AC, VoidPayload } from 'types/store';
+import { VoidPayload, AC } from 'types/store';
 import { St } from './state';
 import http from 'services/http';
 
@@ -15,28 +15,26 @@ export function changeDesc(payload: string | VoidPayload, moduleState: St, actio
     if (typeof payload === 'string') {
       desc = payload;
     } else {
-      desc = `module--${actionCtx.module} ${payload.currentTarget.nodeName} ${Date.now()}`;
-      ;
+      desc = `module--${actionCtx.module} ${payload.currentTarget.nodeName} ${Date.now()}`;;
     }
   }
-  return {desc};
+  return { desc };
 }
 
-interface FetchListP {
+interface FetchListP{
   current: number,
   pageSize: number,
 }
-
-export async function fetchList({current, pageSize}: FetchListP): Promise<{ pageList: any[], total: number }> {
+export async function fetchList({ current, pageSize }: FetchListP): Promise<{ pageList: any[], total: number }> {
   const todos = await http.get('api/todos');
   console.log(current, pageSize, todos);
-  return {pageList: todos, total: 1000};
+  return { pageList: todos, total: 1000 };
 }
 
-export function foo() {
+export function foo(){
   console.log('call foo');
 }
 
-export function clear() {
+export function clear(){
   console.log('clear');
 }

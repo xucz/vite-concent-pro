@@ -1,7 +1,7 @@
 import React from 'react';
 import { useConcent, SettingsType, StateType, ComputedValType } from 'concent';
 import { DEMO, T_DEMO, DEMO_CLONED, COUNTER } from 'configs/c2Mods';
-import { CtxMConn, ItemsType } from 'types/store';
+import { CtxMConn, ItemsType, RootState } from 'types/store';
 
 type Mods = ItemsType<typeof connect>;
 type St = StateType<typeof iState>;

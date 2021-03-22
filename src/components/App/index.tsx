@@ -1,80 +1,59 @@
-import 'configs/runConcent';
 // +++ node modules +++
 import React from 'react';
-import { ConnectRouter, getUrlChangedEvName } from 'react-router-concent';
+import { ConnectRouter } from 'react-router-concent';
 import { BrowserRouter } from 'react-router-dom';
-import { Layout, Spin } from 'antd';
-import { useConcent } from 'concent';
+import { Layout, Spin, Skeleton } from 'antd';
+import { cst } from 'concent';
 // +++ project modules +++
 import { CtxDe } from 'types/store';
 import SiderSwitchIcon from 'components/biz-dumb/SiderSwitchIcon';
-import { getBasename, getRelativeRootPath } from 'services/appPath';
-import { path2menuGroup, path2menuItem } from 'configs/derived/menus';
+import { getBasename } from 'services/appPath';
+import { useC2Mod } from 'services/concent';
 // +++ local modules +++
-import styles from './App.module.css';
 import Routes from './Routes';
 import Sider from './Sider';
 import Footer from './Footer';
 import Header from './Header';
 
-const {Content} = Layout;
-
-function setup({effect, on, globalReducer}: CtxDe) {
-
-  const setAppPathLabel = () => {
-    const curAppPath = getRelativeRootPath();
-    const menuItem = path2menuItem[curAppPath];
-    if (menuItem) {
-      const label2 = menuItem.label;
-      const menuGroup = path2menuGroup[curAppPath];
-      let label1 = '';
-      if (menuGroup) {
-        label1 = `${menuGroup.label}/`;
-      }
-      const dom = document.querySelector('#appPathLabel') as any;
-      if (!dom) return;
-      dom.innerText = `${label1}${label2}`;
-    }
-  };
-
+function setup({ effect, globalReducer, globalState, globalComputed }: CtxDe) {
   effect(() => {
-    setAppPathLabel();
-    globalReducer.prepareApp()
+    globalReducer.prepareApp();
   }, []);
 
-  on(getUrlChangedEvName(), (param, action, history) => {
-    console.log(param, action, history);
-    setAppPathLabel();
-  });
+  return {
+    renderContentArea() {
+      const { contentLayoutStyle } = globalComputed;
+      let uiContentArea = '' as React.ReactNode;
+      if (!globalState.isAppReady) {
+        uiContentArea = <Layout style={{ ...contentLayoutStyle, padding: '64px' }}>
+          <Skeleton avatar paragraph={{ rows: 4 }} />
+          <Skeleton avatar paragraph={{ rows: 4 }} />
+          <Spin>
+            <div style={{ textAlign: 'center' }}>系统初始化中...</div>
+          </Spin>
+        </Layout>;
+      } else {
+        // 给一个最小高度，确保路由组件在异步加载过程中，Footer出现在底部
+        uiContentArea = <div style={{ minHeight: 'calc(100vh - 120px)' }}><Routes /></div>;
+      }
+      return uiContentArea;
+    }
+  };
 }
 
 function App() {
-  const {globalReducer, globalState, globalComputed} = useConcent<{}, CtxDe>({setup, tag: 'App'});
-  const siderVisible = globalState.siderVisible;
-
-  let uiContentArea = '' as React.ReactNode;
-  if (!globalState.isAppReady) {
-    uiContentArea = <Spin>系统初始化中...</Spin>
-  } else {
-    uiContentArea = <Routes/>;
-  }
-
+  const { globalReducer, globalState, globalComputed, settings } = useC2Mod(cst.MODULE_DEFAULT, { setup, tag: 'App' });
   return (
     <Layout>
       <Layout>
-        <Header/>
+        <Header />
       </Layout>
       <Layout>
-        <SiderSwitchIcon des={globalComputed.siderIconDes} onClick={globalReducer.toggleSiderVisible}/>
-        {siderVisible && <Sider/>}
+        <SiderSwitchIcon des={globalComputed.siderIconDes} onClick={globalReducer.toggleSiderVisible} />
+        {globalState.siderVisible && <Sider />}
       </Layout>
-      <Layout style={globalComputed.contentLayoutStyle}>
-        <h5 id="appPathLabel"></h5>
-        <Content id="appContentArea" className={styles.contentWrap}>
-          {uiContentArea}
-        </Content>
-        <Footer/>
-      </Layout>
+      {settings.renderContentArea()}
+      <Footer />
     </Layout>
   );
 }
@@ -83,7 +62,7 @@ export default React.memo(() => {
   return (
     <BrowserRouter basename={`/${getBasename()}`}>
       <ConnectRouter callUrlChangedOnInit={true}>
-        <App/>
+        <App />
       </ConnectRouter>
     </BrowserRouter>
   );
