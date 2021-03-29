@@ -3,6 +3,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import proxy from "./config/proxy"
 import reactRefresh from '@vitejs/plugin-react-refresh'
+import legacyPlugin from '@vitejs/plugin-legacy'
 import vitePluginImp from 'vite-plugin-imp'
 
 // https://cn.vitejs.dev/config/
@@ -32,6 +33,9 @@ export default defineConfig({
   plugins: [
     // react-refresh插件
     reactRefresh(),
+    legacyPlugin({
+      targets: ['Android > 39', 'Chrome >= 60', 'Safari >= 10.1', 'iOS >= 10.3', 'Firefox >= 54',  'Edge >= 15'],
+    }),
     // 按需引用的插件, 因为主题设置不能
     // vitePluginImp({
     //   libList: [
