@@ -15,6 +15,11 @@ import { CtxDe } from 'types/store';
 import styles from './App.module.css';
 
 const { Content } = Layout;
+
+const Fallback = () => {
+  return <div>Loading...</div>;
+};
+
 class Routes extends React.Component {
   ctx = {} as CtxDe;
   errOccurred = false;
@@ -25,19 +30,16 @@ class Routes extends React.Component {
   };
 
   $$setup() {
-    this.ctx.on(getUrlChangedEvName(), () => {
-      if (this.errOccurred) {
-        this.errOccurred = false;
-        this.setState({ err: '' });
-      }
-    });
-
     this.ctx.effect(() => {
       this.changeNavData();
     }, []);
 
     this.ctx.on(getUrlChangedEvName(), (param, action, history) => {
       console.log(param, action, history);
+      if (this.errOccurred) {
+        this.errOccurred = false;
+        this.setState({ err: '' });
+      }
       this.changeNavData();
     });
   }
@@ -64,10 +66,12 @@ class Routes extends React.Component {
   // 提示当前路由页崩溃
   renderCrashTip = () => {
     return (
-      <h1 style={{ color: 'red' }}>
-        当前路由页面崩溃，请联系 xxx开发者 做进一步跟踪，如果是开发者，可打开console查看具体错误,
-        如想继续访问当前页面，可刷新留浏览器重试。
-      </h1>
+      <Layout style={this.ctx.globalComputed.contentLayoutStyle}>
+        <h1 style={{ color: 'red', padding: '64px' }}>
+          当前路由页面崩溃，请联系 xxx开发者 做进一步跟踪，如果是开发者，可打开console查看具体错误,
+          如想继续访问当前页面，可刷新留浏览器重试。
+        </h1>
+      </Layout>
     );
   }
 
@@ -86,8 +90,6 @@ class Routes extends React.Component {
   makeCompWrap = (item: IMenuItem) => {
     return (props: RouteComponentProps) => {
       const { showBreadcrumb = true, setContentLayout = true } = item;
-      const uiPageComp = <item.Component {...props} />;
-
       let uiBreadcrumb = '' as React.ReactNode;
       if (showBreadcrumb) uiBreadcrumb = this.renderNavBreadcrumb();
       const { contentLayoutStyle } = this.ctx.globalComputed;
@@ -97,8 +99,8 @@ class Routes extends React.Component {
           <Layout style={contentLayoutStyle}>
             {uiBreadcrumb}
             <Layout style={{ padding: '24px' }}>
-              <Content id="appContentArea" className={styles.contentWrap}>
-                {uiPageComp}
+              <Content className={styles.contentWrap}>
+                <item.Component {...props} />
               </Content>
             </Layout>
           </Layout>
@@ -108,7 +110,7 @@ class Routes extends React.Component {
       return (
         <Layout style={contentLayoutStyle}>
           {uiBreadcrumb}
-          {uiPageComp}
+          <item.Component {...props} />
         </Layout>
       );
     };
@@ -142,7 +144,7 @@ class Routes extends React.Component {
     }
     const { uiRoutes, uiHomeRoute } = this.buildRouteUi();
     return (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Fallback />}>
         <Switch>
           {uiRoutes}
           {uiHomeRoute}

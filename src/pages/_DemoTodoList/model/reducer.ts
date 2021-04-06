@@ -1,4 +1,4 @@
-import http from 'services/http';
+import * as todoServ from 'services/domain/todo';
 import { VoidPayload } from 'types/store';
 import { IAC, St } from './meta';
 
@@ -11,8 +11,8 @@ interface FetchListPayload {
   pageSize: number,
 }
 export async function fetchList({ current, pageSize }: FetchListPayload, moduleState: St) {
-  const todos = await http.get('/api/todos');
-  return { pageList: todos, total: 1000 };
+  const ret = await todoServ.getTodoList();
+  return { pageList: ret.list, total: ret.total };
 }
 
 export function foo() {

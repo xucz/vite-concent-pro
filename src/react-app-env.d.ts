@@ -98,3 +98,16 @@ declare module 'rc-picker' {
     selectedKeys?: React.Key[];
   }
 }
+
+
+/** @see https://github.com/Qix-/color */
+declare module 'color' {
+  export default class {
+    constructor(hex: string): this;
+    alpha(val: number): this;
+    lighten(val: number): this;
+    hex(): string;
+  };
+}
+
+

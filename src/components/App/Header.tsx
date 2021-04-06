@@ -16,10 +16,13 @@ interface ISettingPanelProps {
   onSiderThemeChange: SwitchChangeEventHandler;
   headerThemeChecked: boolean;
   onHeaderThemeChange: SwitchChangeEventHandler;
+  innerMockChecked: boolean;
+  onInnerMockChange: (checked: boolean) => void;
 }
 
 function SettingPanel({
-  color, onChangeComplete, onWebsiteColorChange, siderThemeChecked, onSiderThemeChange, headerThemeChecked, onHeaderThemeChange,
+  color, onChangeComplete, onWebsiteColorChange, siderThemeChecked, onSiderThemeChange,
+  headerThemeChecked, onHeaderThemeChange, innerMockChecked, onInnerMockChange,
 }: ISettingPanelProps) {
   return (
     <div style={{ padding: '12px 28px' }}>
@@ -38,6 +41,12 @@ function SettingPanel({
         <Blank />
         <Switch checkedChildren="关闭暗黑顶栏" unCheckedChildren="开启暗黑顶栏" checked={headerThemeChecked} onChange={onHeaderThemeChange} />
       </div>
+      <VerticalBlank />
+      <div>
+        <Tag color="geekblue">mock设置：</Tag>
+        <Blank />
+        <Switch checkedChildren="关闭innerMock" unCheckedChildren="开启innerMock" checked={innerMockChecked} onChange={onInnerMockChange} />
+      </div>
     </div>
   );
 }
@@ -55,17 +64,19 @@ function setup(ctx: CtxDe) {
     onHeaderThemeChange(checked: boolean) {
       grd.switchHeaderTheme(checked);
     },
+    onInnerMockChange(checked: boolean) {
+      grd.changeIsInnerMock(checked);
+    },
   }
 }
 
 function AppHeader() {
-  const {
-    globalState: st, globalComputed: gcu, settings: se
-  } = useConcent<{}, CtxDe<{}, Se>>({ setup, tag: 'Header' });
+  const { globalState: st, globalComputed: gcu, settings: se } = useConcent<{}, CtxDe<{}, Se>>({ setup, tag: 'Header' });
   const uiContent = <SettingPanel color={st.themeColor} onWebsiteColorChange={se.onWebsiteColorChange}
-    onChangeComplete={se.onWebsiteColorChange} siderThemeChecked={gcu.siderThemeSwitchChecked}
-    headerThemeChecked={gcu.headerThemeSwitchChecked}
-    onSiderThemeChange={se.onSiderThemeChange} onHeaderThemeChange={se.onHeaderThemeChange} />;
+    headerThemeChecked={gcu.headerThemeSwitchChecked} onHeaderThemeChange={se.onHeaderThemeChange}
+    siderThemeChecked={gcu.siderThemeSwitchChecked} onSiderThemeChange={se.onSiderThemeChange}
+    innerMockChecked={st.isInnerMock} onInnerMockChange={se.onInnerMockChange}
+    onChangeComplete={se.onWebsiteColorChange} />;
 
   return (
     <Layout.Header className={styles.header} style={gcu.headerStyle}>

@@ -24,6 +24,9 @@ export default defineConfig({
   server: {
     proxy: proxy, // 代理
   },
+  define: {
+    'process.env.REACT_APP_IS_LOCAL': "'true'",
+  },
   build: {
     minify: 'terser', // 是否进行压缩,boolean | 'terser' | 'esbuild',默认使用terser
     manifest: false, // 是否产出maifest.json

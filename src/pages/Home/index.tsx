@@ -13,6 +13,7 @@ import { AsyncButton } from 'components/dumb/general';
 
 function Home(props: RouteComponentProps) {
   const { state } = useC2Mod(mods.COUNTER);
+
   return (
     <div style={{ paddingTop: '150px' }}>
       <AsyncButton>Welcome to visit concent pro</AsyncButton>

@@ -5,6 +5,22 @@ import ReactDOM from 'react-dom';
 import './styles/index.css';
 import './styles/antd.css';
 import App from 'components/App';
+import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+function getHostNode(id = 'root') {
+  let node = document.getElementById(id);
+  if (!node) {
+    node = document.createElement('div');
+    node.id = id;
+    document.body.appendChild(node);
+  }
+  return node;
+}
 
+ReactDOM.render(<App />, getHostNode('root'));
+
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();

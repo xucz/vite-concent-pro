@@ -72,4 +72,3 @@ export type Empty = void | null | undefined;
 export type MouseEv = React.MouseEvent<HTMLElement>;
 export type ChangeEv = React.ChangeEvent<HTMLElement>;
 export type VoidPayload = Empty | MouseEv;
-

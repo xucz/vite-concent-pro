@@ -5,9 +5,11 @@ export function toggleSiderVisible(p: any, moduleState: St): Partial<St> {
   return { siderVisible: !moduleState.siderVisible }
 }
 
-export function changeThemeColor(themeColor: string) {
+export function changeThemeColor(themeColor: string): Partial<St> {
   colorServ.changeThemeColor(themeColor);
-  return { themeColor }
+  const themeColorLight = colorServ.getThemeColorLight(themeColor);
+  colorServ.changeThemeColorLight(themeColorLight);
+  return { themeColor, themeColorLight }
 }
 
 export function switchSiderTheme(checked: boolean, moduleState: St): Partial<St> {
@@ -16,6 +18,10 @@ export function switchSiderTheme(checked: boolean, moduleState: St): Partial<St>
 
 export function switchHeaderTheme(checked: boolean, moduleState: St): Partial<St> {
   return { headerTheme: checked ? 'dark' : 'light' };
+}
+
+export function changeIsInnerMock(checked: boolean, moduleState: St): Partial<St> {
+  return { isInnerMock: checked };
 }
 
 export async function prepareApp(): Promise<Partial<St>> {

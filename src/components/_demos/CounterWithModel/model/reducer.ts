@@ -22,6 +22,10 @@ export function increment(payload: VoidPayload, moduleState: St): Partial<St> {
   return { value: moduleState.value + moduleState.toInc };
 }
 
+export function incBy(payload: number, moduleState: St): Partial<St> {
+  return { value: moduleState.value + payload };
+}
+
 export async function incrementAsync(payload: VoidPayload, moduleState: St, ac: IAC): Promise<Partial<St>> {
   await delay();
   // or just write ac.dispatch of return

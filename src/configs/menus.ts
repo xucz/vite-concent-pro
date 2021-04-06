@@ -49,6 +49,7 @@ export interface IMenuGroup {
   children: IMenuItem[];
 }
 
+const showDevPage = process.env.REACT_APP_IS_LOCAL === 'true';
 const showUnderLocalMode = window.location.port !== '';
 
 const menus: Array<IMenuItem | IMenuGroup> = [
