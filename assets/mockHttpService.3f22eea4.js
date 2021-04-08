@@ -1,0 +1,1 @@
+var t={"get /api/todo/list":function(t,n){return{data:{total:3,list:[{id:1,name:"hi"}]},msg:"",code:"0"}}};function n(n,o,e){const[i]=o.split("?"),r=t[`${n} ${i}`];return r?"function"==typeof r?r(o,e):r:{}}function o(){return{get:(t,o)=>n("get",t,o),post:(t,o)=>n("post",t,o)}}export{o as mockImpl};
