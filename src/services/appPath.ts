@@ -1,3 +1,6 @@
+if(window.location.host === 'tnfe.github.io') {
+  localStorage.setItem('someBaseNameKey', 'vite-concent-pro/');
+}
 
 const cachedAppName = localStorage.getItem('someBaseNameKey') || '';
 const cachedApiHost = localStorage.getItem('someApiHostKey');
