@@ -8,7 +8,8 @@
     "lint": "eslint ./src --ext ts,tsx",
     "lintfix": "eslint ./src --ext ts,tsx --fix",
     "test": "jest",
-    "snap": "jest -u"
+    "snap": "jest -u",
+    "deploy": "node scripts.js"
   },
   "dependencies": {
     "@ant-design/compatible": "^1.0.8",
@@ -66,6 +67,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "fs-extra": "^9.1.0",
     "i": "^0.3.6",
     "jest": "^24.9.0",
     "jest-environment-jsdom-fourteen": "^1.0.1",
