@@ -1,29 +1,18 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { history } from 'react-router-concent';
-import { routerPath } from 'configs/constant';
 import * as mods from 'configs/c2Mods';
 import { useC2Mod } from 'services/concent';
-import * as sys from 'configs/constant/sys';
-import { Button } from 'antd';
-import { NormalBlank } from 'components/dumb/general';
+import { Divider } from 'antd';
 import { GeneralTable } from 'components/smart/GeneralTable';
-import { DownloadOutlined } from '@ant-design/icons';
 import { AsyncButton } from 'components/dumb/general';
 
 function Home(props: RouteComponentProps) {
   const { state } = useC2Mod(mods.COUNTER);
 
   return (
-    <div style={{ paddingTop: '150px' }}>
-      <AsyncButton>Welcome to visit concent pro</AsyncButton>
-      <h3>mods.COUNTER.state.value {state.value}</h3>
-      <button onClick={() => history.push(routerPath.DEMO)}>to demo page</button>
-      <Button type="primary">查看</Button>
-      <NormalBlank />
-      <Button type="dashed" danger>删除</Button>
-      <NormalBlank />
-      <Button type="primary" icon={<DownloadOutlined />}>下载</Button>
+    <div>
+      <AsyncButton>Welcome to visit vite concent pro</AsyncButton>
+      <Divider></Divider>
       <GeneralTable tid="1" size="small" columns={[]} fetchFn={() => Promise.resolve({ pageList: [], total: 10 })} />
       <GeneralTable tid="2" columns={[]} fetchFn={() => Promise.resolve({ pageList: [], total: 10 })} />
     </div>

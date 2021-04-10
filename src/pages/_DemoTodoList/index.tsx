@@ -35,8 +35,6 @@ function DemoPageTodoList(props: RouteComponentProps) {
 
   return (
     <div>
-      <Alert message={moduleComputed.formattedInput} />
-      <h1 id="bigValue">{state.bigValue}</h1>
       <SearchArea />
       <ListArea />
     </div>

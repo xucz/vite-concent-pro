@@ -3,7 +3,7 @@ import { SiderTheme } from 'antd/lib/layout/Sider';
 import * as colorServ from 'services/color';
 
 function getInitialState() {
-  const themeColor = '#8B572A';
+  const themeColor = '#025232';
 
   return {
     siderVisible: true,
