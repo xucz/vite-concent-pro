@@ -48,7 +48,6 @@ describe('Demo Render', () => {
 
     ref.ctx.settings.changeBigTo(300);
     expect(getModelState().bigValue === 300).toBeTruthy(); // moduleState断言
-    expect(ins.find('h1#bigValue').text() === '300').toBeTruthy(); // 渲染后的ui断言
   });
 
 });

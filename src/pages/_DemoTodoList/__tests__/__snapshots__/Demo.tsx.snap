@@ -7,44 +7,6 @@ exports[`Demo Render generate Demo snapshot 1`] = `
   match={Object {}}
 >
   <div>
-    <Alert
-      message="用户正在输入 "
-    >
-      <CSSMotion
-        motionAppear={false}
-        motionEnter={false}
-        motionName="ant-alert-motion"
-        onLeaveStart={[Function]}
-        visible={true}
-      >
-        <DomWrapper>
-          <div
-            className="ant-alert ant-alert-info ant-alert-no-icon"
-            data-show={true}
-            role="alert"
-            style={Object {}}
-          >
-            <div
-              className="ant-alert-content"
-            >
-              <div
-                className="ant-alert-message"
-              >
-                用户正在输入 
-              </div>
-              <div
-                className="ant-alert-description"
-              />
-            </div>
-          </div>
-        </DomWrapper>
-      </CSSMotion>
-    </Alert>
-    <h1
-      id="bigValue"
-    >
-      100
-    </h1>
     <Memo(SearArea)>
       <div>
         <Input
@@ -754,6 +716,11 @@ exports[`Demo Render generate Demo snapshot 1`] = `
                                           "title": "是否完成",
                                         },
                                       ]
+                                    }
+                                    scroll={
+                                      Object {
+                                        "x": "100%",
+                                      }
                                     }
                                     stickyOffsets={
                                       Object {
@@ -1629,7 +1596,7 @@ exports[`Demo Render generate Demo snapshot 1`] = `
                           prefixCls="ant-select"
                           removeIcon={<ForwardRef(CloseOutlined) />}
                           showSearch={false}
-                          transitionName="slide-up"
+                          transitionName="ant-slide-up"
                           value="50"
                         >
                           <ForwardRef(Select)
@@ -1652,7 +1619,7 @@ exports[`Demo Render generate Demo snapshot 1`] = `
                             prefixCls="ant-select"
                             removeIcon={<ForwardRef(CloseOutlined) />}
                             showSearch={false}
-                            transitionName="slide-up"
+                            transitionName="ant-slide-up"
                             value="50"
                           >
                             <div
@@ -1749,7 +1716,7 @@ exports[`Demo Render generate Demo snapshot 1`] = `
                                   />
                                 }
                                 prefixCls="ant-select"
-                                transitionName="slide-up"
+                                transitionName="ant-slide-up"
                               >
                                 <Trigger
                                   action={Array []}
@@ -1918,7 +1885,7 @@ exports[`Demo Render generate Demo snapshot 1`] = `
                                       "minWidth": null,
                                     }
                                   }
-                                  popupTransitionName="slide-up"
+                                  popupTransitionName="ant-slide-up"
                                   prefixCls="ant-select-dropdown"
                                   showAction={Array []}
                                 >
@@ -1988,7 +1955,7 @@ exports[`Demo Render generate Demo snapshot 1`] = `
                                     searchValue=""
                                     showSearch={false}
                                     tokenWithEnter={false}
-                                    transitionName="slide-up"
+                                    transitionName="ant-slide-up"
                                     value="50"
                                     values={
                                       Array [
@@ -2097,7 +2064,7 @@ exports[`Demo Render generate Demo snapshot 1`] = `
                                         searchValue=""
                                         showSearch={false}
                                         tokenWithEnter={false}
-                                        transitionName="slide-up"
+                                        transitionName="ant-slide-up"
                                         value="50"
                                         values={
                                           Array [
