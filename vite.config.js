@@ -32,6 +32,7 @@ export default defineConfig({
     manifest: false, // 是否产出maifest.json
     sourcemap: false, // 是否产出soucemap.json
     outDir: 'build', // 产出目录
+    commonjsOptions: { transformMixedEsModules: true }
   },
   plugins: [
     // react-refresh插件
