@@ -2,7 +2,6 @@
   "name": "vite-concent-pro",
   "version": "1.0.1",
   "scripts": {
-    "start": "node --max_old_space_size=16384 ./node_modules/vite/bin/vite.js",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
