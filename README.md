@@ -27,7 +27,7 @@ git remote set-url origin git@github.com:tnfe/vite-concent-pro.git
 
 - 安装相关依赖
 ```bash
-npm i
+npm ci
 ```  
 
 - 启动与调试项目
