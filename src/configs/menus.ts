@@ -4,7 +4,7 @@
  */
 import { lazy } from 'react';
 import {
-  RightCircleOutlined, AppstoreAddOutlined, FormOutlined,
+  RightCircleOutlined, AppstoreAddOutlined, FormOutlined, EditOutlined
 } from '@ant-design/icons';
 import { routerPath } from './constant';
 import DemoTodoList from 'pages/_DemoTodoList';
@@ -94,6 +94,12 @@ const menus: Array<IMenuItem | IMenuGroup> = [
         label: 'useSteup',
         path: routerPath.DEMO_USE_SETUP,
         Component: lazy(() => import('pages/_DemoUseSetup')),
+      },
+      {
+        Icon: EditOutlined,
+        label: 'useEdit',
+        path: '/edit_demo',
+        Component: lazy(() => import('pages/_DemoUseEdit')),
       },
     ],
   },
