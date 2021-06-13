@@ -1,0 +1,105 @@
+.layout-sider {
+  box-shadow: 0 2px 6px 4px rgba(26, 37, 51, 0.31);
+}
+
+.layout-sider .ant-menu-submenu-title,
+.layout-sider .ant-menu-item {
+  z-index: 0;
+}
+
+.layout-sider .ant-menu-submenu-title::before,
+.layout-sider .ant-menu-item::before {
+  content: '';
+  width: 0;
+  height: 100%;
+  display: block;
+  /* background: rgba(24, 144, 255, 0.5); */
+  background: rgba(var(--theme-color-rgb), 0.5);
+  box-shadow: 0 0 175px 0 var(--theme-color);
+  z-index: -1;
+  position: absolute;
+  left: 0;
+  right: 0;
+  transition: all 0.6s;
+}
+
+.layout-sider .ant-menu-submenu-title:hover,
+.layout-sider .ant-menu-item:hover {
+  color: white;
+  font-weight: 800;
+}
+
+.layout-sider .ant-menu-submenu-title:hover::before,
+.layout-sider .ant-menu-item:hover::before {
+  width: 100%;
+}
+
+.layout-sider .ant-menu-submenu-title>a:hover,
+.layout-sider .ant-menu-item>a:hover {
+  color: white;
+  font-weight: 800;
+}
+
+.quickNavBarWrapBase {
+  position: relative;
+  width: 100%;
+  background-color: white;
+  height: 32px;
+  box-shadow: rgb(0 21 41 / 8%) 0px 1px 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.quickNavBarWrap .ant-tabs .ant-tabs-nav-wrap {
+  padding-top: 2px;
+  height: 32px;
+}
+
+.quickNavBarWrap .ant-tabs-card.ant-tabs-top>.ant-tabs-nav .ant-tabs-tab-active,
+.quickNavBarWrap .ant-tabs-card.ant-tabs-top>div>.ant-tabs-nav .ant-tabs-tab-active {
+  border: 1px solid var(--theme-color);
+  background-color: var(--theme-color);
+  border-bottom-color: #fff;
+}
+
+.quickNavBarWrap .ant-tabs-card>.ant-tabs-nav .ant-tabs-tab,
+.quickNavBarWrap .ant-tabs-card>div>.ant-tabs-nav .ant-tabs-tab {
+  border: 1px solid lightgray;
+}
+
+.quickNavBarWrap .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
+.quickNavBarWrap .ant-tabs-tab.ant-tabs-tab-active>button {
+  color: white;
+}
+
+.quickNavBarWrap .ant-tabs .ant-tabs-tab {
+  padding: 1px 10px;
+}
+
+
+/** 浅色背景导航条样式集 */
+.quickNavBarLightWrap .ant-tabs .ant-tabs-nav-wrap {
+  padding-top: 2px;
+  height: 32px;
+}
+
+.quickNavBarLightWrap .ant-tabs-card.ant-tabs-top>.ant-tabs-nav .ant-tabs-tab-active,
+.quickNavBarLightWrap .ant-tabs-card.ant-tabs-top>div>.ant-tabs-nav .ant-tabs-tab-active {
+  border: 1px solid var(--theme-color);
+  border-bottom-color: #fff;
+}
+
+.quickNavBarLightWrap .ant-tabs-card>.ant-tabs-nav .ant-tabs-tab,
+.quickNavBarLightWrap .ant-tabs-card>div>.ant-tabs-nav .ant-tabs-tab {
+  border: 1px solid lightgray;
+}
+
+
+.quickNavBarLightWrap .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
+.quickNavBarLightWrap .ant-tabs-tab.ant-tabs-tab-active>button {
+  color: var(--theme-color);
+}
+
+.quickNavBarLightWrap .ant-tabs .ant-tabs-tab {
+  padding: 1px 10px;
+}

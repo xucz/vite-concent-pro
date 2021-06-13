@@ -5,7 +5,6 @@ import * as appService from 'services/domain/app';
 import * as staffService from 'services/staff';
 import * as objUtil from 'utils/obj';
 import * as arrUtil from 'utils/arr';
-import * as timerUitl from 'utils/timer';
 import { FIELD_TYPE_LIST } from 'configs/constant/biz';
 import { IAC, St, CallerParams, ReducerFn } from './meta';
 import getInitialState from './state';
@@ -100,19 +99,12 @@ export async function perpareStep1(p: VoidPayload, moduleState: St, ac: IAC) {
 }
 
 export async function perpareStep2(p: VoidPayload, moduleState: St, ac: IAC) {
-  // 做点延时让 json 区域的输入有机会同步到 moduleState
   await ac.setState({ nextBtnLoading: true });
-  await timerUitl.delay(500);
 
   const { canChangeStep, errors } = validateStepValues(moduleState, modelService.checkStep2);
   if (canChangeStep) {
-    const { dataExample, dataExampleJson } = moduleState;
-    // 可能用户没有输入示例数据，直接使用了 DiInputJson 的占位数据
-    const targetJsonStr = dataExample || JSON.stringify(dataExampleJson);
-    let targetExampleJson = objUtil.safeParse(targetJsonStr);
     return {
-      canChangeStep: true, isBtnClicked: false, errors, dataExample: targetJsonStr,
-      dataExampleJson: targetExampleJson, nextBtnLoading: false,
+      canChangeStep: true, isBtnClicked: false, errors, nextBtnLoading: false,
     };
   }
 

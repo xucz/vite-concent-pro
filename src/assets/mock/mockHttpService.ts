@@ -1,14 +1,23 @@
 import apiData from './apiData';
 
-function tryMockApi(method: string, url: string, data: any) {
+function getMockFnKey(method: string, url: string) {
   const [pureUrl] = url.split('?');
-  const key = `${method} ${pureUrl}`;
+  return `${method} ${pureUrl}`;
+};
+
+function getMockResult(method: string, url: string) {
+  const key = getMockFnKey(method, url);
   const result = apiData[key];
+  return result;
+};
+
+function tryMockApi(method: string, url: string, data: any) {
+  const result = getMockResult(method, url);
   if (result) {
     if (typeof result === 'function') return result(url, data);
     return result;
   }
-  return {};
+  return null;
 }
 
 /**
@@ -21,6 +30,10 @@ export function mockImpl() {
     },
     post: (url: string, data: any) => {
       return tryMockApi('post', url, data);
+    },
+    hasMockedFn: (method: string, url: string) => {
+      const key = getMockFnKey(method, url);
+      return Object.prototype.hasOwnProperty.call(apiData, key);
     },
   };
 };

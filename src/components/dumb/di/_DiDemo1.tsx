@@ -23,7 +23,7 @@ export default function DiInput(props: IProps) {
   const style = { display: 'inline-block' };
   if (block) style.display = 'block';
 
-  const uiRequred = <pre style={stPre}>{required ? '* ' : '  '}</pre>;
+  const uiRequired = <pre style={stPre}>{required ? '* ' : '  '}</pre>;
 
   const {
     item: itemSt = {},
@@ -48,7 +48,7 @@ export default function DiInput(props: IProps) {
   return (
     <div className={styles.diItemWrap} style={mergedItemSt}>
       <span className={styles.diItemTitle} style={titleSt}>
-        {uiRequred}{title}
+        {uiRequired}{title}
       </span>
       <Switch disabled={disabled} checked={value} onChange={onChange}
         size={inputSize} style={inputSt} />

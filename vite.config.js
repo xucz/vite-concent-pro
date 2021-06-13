@@ -13,6 +13,7 @@ export default defineConfig({
   // serve: 'production', // 环境，默认serve 时默认 'development'，build 时默认 'production'，遵循声明大于约定规范
   resolve: {
     alias: { // 别名
+      "layout": path.resolve(__dirname, 'src/layout'),
       "configs": path.resolve(__dirname, 'src/configs'),
       "components": path.resolve(__dirname, 'src/components'),
       "services": path.resolve(__dirname, 'src/services'),

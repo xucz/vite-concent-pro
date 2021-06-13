@@ -21,11 +21,10 @@ export function isObject(val: any, allowArr = true) {
   return typeof val === 'object' && !Array.isArray(val);
 }
 
-export function clone(obj: Record<string, any>) {
+export function clone<T extends Record<string, any>>(obj: T): T {
   if (obj) return JSON.parse(JSON.stringify(obj));
 
   throw new Error('empty object');
-  ;
 }
 
 export function safeGetItemFromArray<T = any>(arr: T[], idx: number, defaultValue: T) {
@@ -48,6 +47,7 @@ export function safeAssign(obj: Record<string, any>, toMod: Record<string, any> 
   Object.keys(toMod).forEach((key) => {
     obj[key] = toMod[key];
   });
+  return obj;
 }
 
 /**
@@ -254,24 +254,38 @@ export function getDepth(obj: Record<string, any>) {
 export function getObjDepth(obj: Record<string, any>) {
   type DepthRecorder = { num: number };
 
-  const tryDectectObjDepth = (obj: Record<string, any>, curDepth: number, depthRecorder: DepthRecorder) => {
+  const tryDetectObjDepth = (obj: Record<string, any>, curDepth: number, depthRecorder: DepthRecorder) => {
     const keys = okeys(obj);
     const newDepth = curDepth + 1;
     for (let i = 0; i < keys.length; i++) {
       const val = obj[keys[i]];
       if (isObject(val)) {
         if (depthRecorder.num < newDepth) depthRecorder.num = newDepth;
-        tryDectectObjDepth(val, newDepth, depthRecorder);
+        tryDetectObjDepth(val, newDepth, depthRecorder);
       }
     }
   };
 
   const depthRecorder: DepthRecorder = { num: 1 };
-  tryDectectObjDepth(obj, 1, depthRecorder);
+  tryDetectObjDepth(obj, 1, depthRecorder);
   return depthRecorder.num;
 }
 
-export function isDepthLargeThan(obj: Record<string, any>, toCompre: number) {
+export function isDepthLargeThan(obj: Record<string, any>, toCompare: number) {
   const depth = getObjDepth(obj);
-  return depth > toCompre;
+  return depth > toCompare;
+}
+
+/**
+ * 确定一个有效值，如果左边无效，则取右边的备用值
+ * @param firstVal
+ * @param secondVal
+ */
+export function decideVal<T extends any>(firstVal: any, secondVal: T): T {
+  if (!isNull(firstVal)) return firstVal;
+  return secondVal;
+}
+
+export function inEnum(val: string | number, enumObj: Record<string, string | number>) {
+  return Object.values(enumObj).includes(val);
 }

@@ -3,40 +3,48 @@
  * 应用左侧的导航栏配置
  */
 import { lazy } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import {
-  RightCircleOutlined, AppstoreAddOutlined, FormOutlined, EditOutlined
+  FormOutlined, OrderedListOutlined, PlusCircleOutlined, RightCircleOutlined,
 } from '@ant-design/icons';
 import { routerPath } from './constant';
-import DemoTodoList from 'pages/_DemoTodoList';
-import DemoTemplate from 'pages/_DemoTemplate';
-
-const ADemoPage = lazy(() => import('pages/Home'));
-const BDemoPage = lazy(() => import('pages/_DemosForLearn'));
+import { isLocalMode } from 'utils/common';
+import HomePage from 'pages/Home';
+// const HomePage = lazy(() => import('pages/Home'));
 
 export interface IMenuItem {
+  /**
+   * 路由组件对应的权限id，如果配置了此值，且 globalState.authIds 不包含这个值，会被渲染为 NotAuth组件
+   * 修改 models/global/reducer.ts 的 prepareApp 逻辑填充 authIds 数据
+   */
+  authId?: string;
   path: string;
   exact?: boolean;
   /**
-   * 是否在边栏里展示，默认是true
+   * 默认值：true，
+   * 是否在边栏里展示，
    * 为false时，只是菜单里看不到入口了，通过路由依然能访问
    */
   showInSider?: boolean;
   /**
    * 菜单对应的页面组件
    */
-  Component: React.MemoExoticComponent<(props: any) => JSX.Element> | React.LazyExoticComponent<React.MemoExoticComponent<(props: any) => JSX.Element>>,
+  Component: React.ComponentType<any>;
   /**
-   * 页面组件头部是否出现面包屑，提示用户当前所处的页面路径
-   * 默认值：true
+   * 路由对应的实际组件挂载前执行的逻辑
+   * 如果返回了具体的组件片段，则会替换掉改路由对应的实际组件
+   * 通常的使用场景:
+   * 1 提奖将路由信息写入某个store，子组件渲染时能够及时拿到
+   * 2 判断某些条件，不成立的话，不挂载目标路由组件，替换为该函数返回的视图片段
    */
-  showBreadcrumb?: boolean;
+  beforeComponentMount?: (props: RouteComponentProps) => React.ReactNode | void;
   /**
-   * 页面组件是否包一层统一的默认布局组件
    * 默认值：true
+   * 页面组件是否包一层统一的默认布局组件
    */
   setContentLayout?: boolean;
   label: string;
-  Icon?: React.SFC;
+  Icon?: React.SFC<{ style?: React.CSSProperties }>;
   /** 是否是首页，匹配路径 / 时也能访问，默认 false */
   isHomePage?: boolean;
 }
@@ -45,63 +53,67 @@ export interface IMenuGroup {
   /** 用于辅助计算 menu是否展开 */
   key: string;
   label: string;
-  Icon?: React.SFC;
+  Icon?: React.SFC<{ style?: React.CSSProperties }>;
   children: IMenuItem[];
 }
 
-const showDevPage = process.env.REACT_APP_IS_LOCAL === 'true';
-const showUnderLocalMode = window.location.port !== '';
+const showUnderLocalMode = isLocalMode();
 
 const menus: Array<IMenuItem | IMenuGroup> = [
   {
-    showInSider: showUnderLocalMode,
-    label: 'todoList',
-    path: '/todolist',
-    Component: DemoTodoList,
-    // setContentLayout: false,
-    // showBreadcrumb: false,
+    Icon: FormOutlined,
+    label: '首页',
+    path: routerPath.DEMO,
+    Component: HomePage,
+    isHomePage: true,
   },
   {
-    label: 'template',
-    path: '/template',
-    Component: DemoTemplate,
-  },
-  {
-    label: '分步表单',
-    path: '/step-form',
-    Component: lazy(() => import('pages/AStepForm')),
-  },
-  {
-    key: 'someExamples',
-    label: '一些示例',
-    Icon: AppstoreAddOutlined,
+    key: 'listExamples',
+    label: 'list示例集合',
+    Icon: OrderedListOutlined,
     children: [
       {
         Icon: FormOutlined,
         label: '简单列表',
-        path: routerPath.DEMO,
-        Component: ADemoPage,
-        isHomePage: true,
+        path: routerPath.SIMPLE_LIST,
+        Component: lazy(() => import('pages/TodoList')),
       },
       {
-        Icon: RightCircleOutlined,
-        label: '计数器',
-        path: '/somelist',
-        Component: BDemoPage,
+        showInSider: showUnderLocalMode,
+        label: 'todoList',
+        path: '/todolist',
+        Component: lazy(() => import('pages/TodoList')),
       },
-      {
-        Icon: RightCircleOutlined,
-        label: 'useSteup',
-        path: routerPath.DEMO_USE_SETUP,
-        Component: lazy(() => import('pages/_DemoUseSetup')),
-      },
-      {
-        Icon: EditOutlined,
-        label: 'useEdit',
-        path: '/edit_demo',
-        Component: lazy(() => import('pages/_DemoUseEdit')),
-      },
-    ],
+    ]
+  },
+  {
+    label: 'template',
+    path: '/template',
+    Component: lazy(() => import('pages/_Demos/Template')),
+  },
+  {
+    label: '计数器',
+    path: '/counter',
+    Icon: PlusCircleOutlined,
+    Component: lazy(() => import('pages/Counter')),
+  },
+  {
+    label: '计数器2',
+    path: '/counter2',
+    Icon: PlusCircleOutlined,
+    setContentLayout: false,
+    Component: lazy(() => import('pages/Counter')),
+  },
+  {
+    label: '分步表单',
+    path: routerPath.STEP_FORM,
+    Component: lazy(() => import('pages/AStepForm')),
+  },
+  {
+    Icon: RightCircleOutlined,
+    label: 'useSetup',
+    path: routerPath.DEMO_USE_SETUP,
+    Component: lazy(() => import('pages/_Demos/SomeComponent/UseSetup')),
   },
 ];
 

@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Render generate Header snapshot 1`] = `
+<Memo(AppHeader)>
+  <Header
+    className="header"
+    style={
+      Object {
+        "backgroundColor": "white",
+        "color": "var(--theme-color)",
+        "display": "none",
+        "marginLeft": "48px",
+        "zIndex": 4,
+      }
+    }
+  >
+    <Basic
+      className="header"
+      prefixCls="ant-layout-header"
+      style={
+        Object {
+          "backgroundColor": "white",
+          "color": "var(--theme-color)",
+          "display": "none",
+          "marginLeft": "48px",
+          "zIndex": 4,
+        }
+      }
+      tagName="header"
+    >
+      <header
+        className="ant-layout-header header"
+        style={
+          Object {
+            "backgroundColor": "white",
+            "color": "var(--theme-color)",
+            "display": "none",
+            "marginLeft": "48px",
+            "zIndex": 4,
+          }
+        }
+      >
+        <div
+          className="headerRightAreaWrap"
+          style={
+            Object {
+              "color": "var(--theme-color)",
+            }
+          }
+        >
+          <Avatar
+            className="userIconWarp"
+            shape="circle"
+            size={32}
+            src=""
+          >
+            <span
+              className="ant-avatar ant-avatar-circle userIconWarp"
+              style={
+                Object {
+                  "fontSize": 18,
+                  "height": 32,
+                  "lineHeight": "32px",
+                  "width": 32,
+                }
+              }
+            >
+              <img
+                onError={[Function]}
+                src=""
+              />
+            </span>
+          </Avatar>
+          <Blank
+            width="8px"
+          >
+            <div
+              style={
+                Object {
+                  "display": "inline-block",
+                  "height": "16px",
+                  "width": "8px",
+                }
+              }
+            />
+          </Blank>
+          <Blank
+            width="8px"
+          >
+            <div
+              style={
+                Object {
+                  "display": "inline-block",
+                  "height": "16px",
+                  "width": "8px",
+                }
+              }
+            />
+          </Blank>
+        </div>
+      </header>
+    </Basic>
+  </Header>
+</Memo(AppHeader)>
+`;
+
+exports[`Header Render generate SettingPanel snapshot 1`] = `
+<Memo(SettingDrawer)>
+  <DrawerWrapper
+    onClose={[Function]}
+    title="常用设置"
+    visible={false}
+    width="550px"
+  >
+    <Drawer
+      closable={true}
+      height={256}
+      keyboard={true}
+      level={null}
+      mask={true}
+      maskClosable={true}
+      onClose={[Function]}
+      placement="right"
+      prefixCls="ant-drawer"
+      push={
+        Object {
+          "distance": 180,
+        }
+      }
+      title="常用设置"
+      visible={false}
+      width="550px"
+    >
+      <DrawerWrapper
+        afterVisibleChange={[Function]}
+        className=""
+        defaultOpen={false}
+        duration=".3s"
+        ease="cubic-bezier(0.78, 0.14, 0.15, 0.86)"
+        forceRender={false}
+        getContainer="body"
+        handler={false}
+        keyboard={true}
+        level={null}
+        maskClosable={true}
+        maskStyle={Object {}}
+        onChange={[Function]}
+        onClose={[Function]}
+        open={false}
+        placement="right"
+        prefixCls="ant-drawer"
+        showMask={true}
+        style={
+          Object {
+            "transform": undefined,
+            "zIndex": undefined,
+          }
+        }
+        width="550px"
+        wrapperClassName=""
+      >
+        <PortalWrapper
+          forceRender={false}
+          getContainer="body"
+          visible={false}
+          wrapperClassName=""
+        />
+      </DrawerWrapper>
+    </Drawer>
+  </DrawerWrapper>
+</Memo(SettingDrawer)>
+`;

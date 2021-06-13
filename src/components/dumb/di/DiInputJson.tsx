@@ -9,10 +9,6 @@ import { defaultSettings as d } from './common';
 import JSONInput from 'react-json-editor-ajrm';
 import locale from 'react-json-editor-ajrm/locale/en';
 
-// const MuJSONInput = styled(JSONInput)`
-
-// `;
-
 const stPre = { color: 'red', display: 'inline-block', verticalAlign: 'top' };
 const stIBtn = { position: 'absolute', right: '-38px', top: '0px', zIndex: 999 } as const;
 const stIBtnLabel = { position: 'absolute', right: '-138px', top: '0px', zIndex: 999 } as const;
@@ -31,18 +27,16 @@ interface IProps extends IDiCompPropsBase {
   placeholder?: any,
 }
 
-const noop = () => { };
-
 export default function DiInput(props: IProps) {
   const {
-    title, value, onChange, block,  required = true, extraStyle = {},
+    title, onChange, block,  required = true, extraStyle = {},
     interactiveCb, interactiveLabel = '', interactiveBtnLoading = false, placeholder = {},
     error,
   } = props;
   const style = { display: 'inline-block' };
   if (block) style.display = 'block';
 
-  const uiRequred = <pre style={stPre}>{required ? '* ' : '  '}</pre>;
+  const uiRequired = <pre style={stPre}>{required ? '* ' : '  '}</pre>;
 
   const {
     item: itemSt = {},
@@ -83,7 +77,7 @@ export default function DiInput(props: IProps) {
   return (
     <div className={styles.diItemWrap} style={mergedItemSt}>
       <span className={styles.diItemTitle} style={titleSt}>
-        {uiRequred}{title}
+        {uiRequired}{title}
       </span>
       <div style={mergedInputSt}>
         <JSONInput

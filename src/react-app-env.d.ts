@@ -106,8 +106,8 @@ declare module 'color' {
     constructor(hex: string): this;
     alpha(val: number): this;
     lighten(val: number): this;
+    object(): { r: number, g: number, b: number };
     hex(): string;
   };
 }
-
 

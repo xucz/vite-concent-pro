@@ -22,13 +22,6 @@ const MyCard = styled(Card)`
     font-size: 14px;
   }
 `;
-const MyCard2 = styled(Card)`
-  .ant-card-head-title{
-    height:46px;
-    font-size: 14px;
-    padding-top: 32px;
-  }
-`;
 const stExtra = { item: { width: '300px' }, title: { width: '70px' } };
 
 function setup(ctx: CtxPre) {

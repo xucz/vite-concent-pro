@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Row, Col } from 'antd';
-import { DiInput, DiSelect, DiInputNum, DiInputJson } from 'components/dumb/di';
+import { DiInput, DiSelect, DiInputNum, DiInputJsonMonaco } from 'components/dumb/di';
 import { EmptyView, VerticalBlank } from 'components/dumb/general';
 import { CtxPre, useModelWithSetup } from './model/meta';
 
@@ -24,19 +24,19 @@ interface IProps {
 }
 
 function DataSync(props: IProps) {
-  const { state, sync, settings: se } = useModelWithSetup(setup);
+  const { state, syncer, settings: se } = useModelWithSetup(setup);
   const { errors } = state;
   if (state.step !== props.step) return <EmptyView />;
   return (
     <Card title="数据源">
       <Row>
         <Col span={8}>
-          <DiSelect title="数据库类型:" value={state.dbType} onChange={sync('dbType')} error={errors.dbType}
+          <DiSelect title="数据库类型:" value={state.dbType} onChange={syncer.dbType} error={errors.dbType}
             data={se.dbTypeOptions} extraStyle={seEx}
           />
         </Col>
         <Col span={8}>
-          <DiInput title="数据库别名:" value={state.dbAlias} onChange={sync('dbAlias')} error={errors.dbAlias}
+          <DiInput title="数据库别名:" value={state.dbAlias} onChange={syncer.dbAlias} error={errors.dbAlias}
             extraStyle={seEx}
           />
         </Col>
@@ -44,17 +44,17 @@ function DataSync(props: IProps) {
       <VerticalBlank />
       <Row>
         <Col span={8}>
-          <DiInputNum title="预估总数1:" value={state.count1} onChange={sync('count1')}
+          <DiInputNum title="预估总数1:" value={state.count1} onChange={syncer.count1}
             error={errors.count1} extraStyle={seEx} formatter={se.formatter}
           />
         </Col>
         <Col span={8}>
-          <DiInputNum title="预估总数2:" value={state.count2} onChange={sync('count2')}
+          <DiInputNum title="预估总数2:" value={state.count2} onChange={syncer.count2}
             error={errors.count2} extraStyle={seEx} formatter={se.formatter}
           />
         </Col>
         <Col span={8}>
-          <DiInputNum title="预估总数3:" value={state.count3} onChange={sync('count3')}
+          <DiInputNum title="预估总数3:" value={state.count3} onChange={syncer.count3}
             error={errors.count3} extraStyle={seEx} formatter={se.formatter}
           />
         </Col>
@@ -62,8 +62,8 @@ function DataSync(props: IProps) {
       <VerticalBlank />
       <Row>
         <Col span={16}>
-          <DiInputJson title="示例数据:" value={state.dataExample} onChange={sync('dataExample')} extraStyle={seEx}
-            error={errors.dataExample} placeholder={state.dataExampleJson} interactiveCb={se.openJsonEditor}
+          <DiInputJsonMonaco title="示例数据:" value={state.dataExample} onChange={syncer.dataExample}
+            extraStyle={seEx} error={errors.dataExample} interactiveCb={se.openJsonEditor}
             interactiveLabel="Open JsonEditor"
           />
         </Col>

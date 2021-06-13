@@ -3,6 +3,7 @@ function getInitialState() {
   return {
     value: 0,
     bigValue: 100,
+    barData: [] as any[],
   };
 }
 

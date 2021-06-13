@@ -4,6 +4,8 @@ import qs from 'qs';
 import axios from 'axios';
 import * as messageService from './message';
 import * as objUtil from 'utils/obj';
+import * as timerUtil from 'utils/timer';
+import * as urlUtil from 'utils/url';
 import * as c2Serv from 'services/concent';
 // import resData from 'assets/response-data';
 
@@ -17,8 +19,26 @@ export interface IReqOptions {
   returnLogicData?: boolean;
   defaultValue?: any;
   /**
-   * 是否检查服务返回code，并做错误提示
+   * 请求的业务前缀，默认 undefined，仅当用户需要根据前缀来区分不同环境时，才需要定义
+   * 调用语句示例 httpService.get(url:string, data:IDataPrams, { bizServiceName: string })
+   * url: '/some/action', bizServiceName: 'category-test' ---> '/category-test/some/action'
+   * url: '/some/action', bizServiceName: 'category' ---> '/category/some/action'
+   * url: '/some/action', bizServiceName: 'www.a.com/xx' ---> 'www.a.com/xx/some/action'
+   * 但要注意调用url包含了协议时，定义的 bizServiceName 是无效的，并不会影响实际发起的请求
+   * url: 'http://www.a.com/some/action', bizServiceName: 'www.b.com/xx' ---> 'http://www.a.com/some/action''
+   *
+   * 推荐用户写个函数获取当前调用api的业务前缀，如 getCateApiPrefix(): 'category' | 'category-test'
+   * 然后动态的传递给 httpService.get 调用，此时调用语句形如：
+   * httpService.get('/some/action', null, { bizServiceName: getCateApiPrefix() })
+   *
+   * 此前缀不影响 assets/mock/apiData/index.ts 文件的key映射
+   * 调用 httpService.get('/some/action', null, { bizServiceName: 'category' })
+   * key 依然是写 'get /some/action'
+   */
+  bizServiceName?: string,
+  /**
    * default = true
+   * 是否检查服务返回code，并做错误提示
    */
   check?: boolean;
   /**
@@ -72,11 +92,11 @@ const generalOptions = {
 function seperateOptions(options: any = {}) {
   const {
     returnLogicData, defaultValue = '', check = true, alertErrorMsg = true,
-    failStrategy = cute.const.KEEP_ALL_BEEN_EXECUTED, ...cuteOptions
+    failStrategy = cute.const.KEEP_ALL_BEEN_EXECUTED, bizServiceName = '', ...cuteOptions
   } = options;
   // cute-http的调用相关可选参数
   cuteOptions.failStrategy = failStrategy;
-  return { logicOptions: { returnLogicData, defaultValue, check, alertErrorMsg }, cuteOptions };
+  return { logicOptions: { returnLogicData, defaultValue, check, alertErrorMsg, bizServiceName }, cuteOptions };
 }
 
 const checkCode = (axiosReply: any, url = '', checkOptions: IReqOptions = {}) => {
@@ -115,17 +135,23 @@ const checkCode = (axiosReply: any, url = '', checkOptions: IReqOptions = {}) =>
   return toReturn;
 };
 
-const attachPrefixAndData = (url: string, data: DataParams | '') => {
+const attachPrefixAndData = (url: string, data: DataParams | '', bizServiceName?: string) => {
   const pureUrl = url.replace(/ /g, '');
   let prefixedUrl = `${pureUrl}`;
 
-  // 此处可自定义一些其他规则修改 prefixedUrl
-  // 例如通过 process.env.
-
-  if (data) {
-    if (pureUrl.includes('?')) return `${prefixedUrl}&${qs.stringify(data)}`;
-    return `${prefixedUrl}?${qs.stringify(data)}`;
+  if (!pureUrl.startsWith('http')) {
+    if (bizServiceName) {
+      if (bizServiceName.startsWith('http')) prefixedUrl = `${bizServiceName}${pureUrl}`;
+      else prefixedUrl = `/${bizServiceName}${pureUrl}`;
+    }
   }
+
+  if (!objUtil.isNull(data)) {
+    const dataQueryStr = qs.stringify(data);
+    if (pureUrl.includes('?')) return `${prefixedUrl}&${dataQueryStr}`;
+    return `${prefixedUrl}?${dataQueryStr}`;
+  }
+
   return prefixedUrl;
 };
 
@@ -144,27 +170,42 @@ function handleError(error: any, options: any, defaultValue: any) {
 
 async function sendRequest(method: string, url: string, data?: DataParams, options = {}) {
   const { logicOptions, cuteOptions } = seperateOptions(options);
-  const { returnLogicData, defaultValue = '', check = true } = logicOptions;
+  const { returnLogicData, defaultValue = '', check = true, bizServiceName } = logicOptions;
 
   try {
     const mergedOpt = { ...generalOptions, ...cuteOptions };
     let reply;
-    const { isInnerMock, innerMockApis } = c2Serv.getGlobalState();
-    if (isInnerMock && innerMockApis.includes(`${method} ${url}`)) {
-      const { mockImpl } = await import('../assets//mock/mockHttpService');
+    const { isInnerMock, excludedMockApis } = c2Serv.getGlobalState();
+
+    const getRealReply = async () => {
+      let reply;
+      if (method === 'get') {
+        reply = await cute[method](attachPrefixAndData(url, data || '', bizServiceName), '', mergedOpt);
+      } else {
+        reply = await cute[method](attachPrefixAndData(url, '', bizServiceName), data, mergedOpt);
+      }
+      return reply;
+    };
+
+    if (isInnerMock) {
+      const { mockImpl } = await import('../assets/mock/mockHttpService');
       if (method === 'get' || method === 'post') {
+        await timerUtil.delay(300);
         const fakeHttp = mockImpl();
-        // 包裹成类 axiosReply 对象
-        reply = { statusCode: 200, data: fakeHttp[method](url, data) };
+        const isUrlBeenMocked = fakeHttp.hasMockedFn(method, url);
+        // 已实现mock、没在排除名单里
+        if (isUrlBeenMocked && !excludedMockApis.includes(`${method} ${urlUtil.purify(url)}`)) {
+          const mockResult = fakeHttp[method](url, data);
+          // 包裹成类 axiosReply 对象
+          reply = { statusCode: 200, data: mockResult };
+        } else {
+          reply = await getRealReply();
+        }
       } else {
         throw new Error(`method[${method}] not implemented in mockHttpService`);
       }
     } else {
-      if (method === 'get') {
-        reply = await cute[method](attachPrefixAndData(url, data || ''), '', mergedOpt);
-      } else {
-        reply = await cute[method](attachPrefixAndData(url, ''), data, mergedOpt);
-      }
+      reply = await getRealReply();
     }
 
     return checkCode(reply, url, { returnLogicData, check });
@@ -194,7 +235,7 @@ async function put(url: string, body?: DataParams, options?: IReqOptions) {
  */
 async function sendXForm(method: string, url: string, data: DataParams, options = {}) {
   const { logicOptions, cuteOptions } = seperateOptions(options);
-  const { returnLogicData, defaultValue = '', check = true } = logicOptions;
+  const { returnLogicData, defaultValue = '', check = true, bizServiceName } = logicOptions;
   try {
     const xFormOptions = getXFormOptions();
     const mergedOpt = { ...xFormOptions, ...cuteOptions };
@@ -209,7 +250,7 @@ async function sendXForm(method: string, url: string, data: DataParams, options 
       }
     }
 
-    const reply = await cute[method](attachPrefixAndData(url, ''), qs.stringify(_data), mergedOpt);
+    const reply = await cute[method](attachPrefixAndData(url, '', bizServiceName), qs.stringify(_data), mergedOpt);
     return checkCode(reply, url, { returnLogicData, check });
   } catch (err) {
     return handleError(err, options, defaultValue);
@@ -226,10 +267,10 @@ async function xFormPut(url: string, data: DataParams, options = {}) {
 
 async function multiGet(urls: string[], options: IReqOptions = {}) {
   const { logicOptions, cuteOptions } = seperateOptions(options);
-  const { returnLogicData, defaultValue = '', check = true } = logicOptions;
+  const { returnLogicData, defaultValue = '', check = true, bizServiceName } = logicOptions;
   try {
     delete options.returnLogicData;
-    const _urls = urls.map(url => attachPrefixAndData(url, ''));
+    const _urls = urls.map(url => attachPrefixAndData(url, '', bizServiceName));
     const replyList: any[] = await cute.multiGet(_urls, { ...generalOptions, ...cuteOptions });
     return replyList.map((r, idx) => checkCode(r, _urls[idx], { returnLogicData, check }));
   } catch (err) {
@@ -239,11 +280,11 @@ async function multiGet(urls: string[], options: IReqOptions = {}) {
 
 async function multiPost(items: MultiItem[], options: IReqOptions = {}) {
   const { logicOptions, cuteOptions } = seperateOptions(options);
-  const { returnLogicData, defaultValue = '', check = true } = logicOptions;
+  const { returnLogicData, defaultValue = '', check = true, bizServiceName } = logicOptions;
 
   try {
     delete options.returnLogicData;
-    items.forEach(item => item.url = attachPrefixAndData(item.url, ''));
+    items.forEach(item => item.url = attachPrefixAndData(item.url, '', bizServiceName));
     const replyList: any[] = await cute.multiPost(items, { ...generalOptions, ...cuteOptions });
     return replyList.map((r, idx) => checkCode(r, items[idx].url, { returnLogicData, check }));
   } catch (err) {
@@ -257,8 +298,8 @@ async function multiPost(items: MultiItem[], options: IReqOptions = {}) {
  */
 async function postFormData(url: string, data: DataParams, options: IReqOptions) {
   const { logicOptions, cuteOptions } = seperateOptions(options);
-  const { returnLogicData, defaultValue = '', check = true } = logicOptions;
-  const finalUrl = attachPrefixAndData(url, '');
+  const { returnLogicData, defaultValue = '', check = true, bizServiceName } = logicOptions;
+  const finalUrl = attachPrefixAndData(url, '', bizServiceName);
 
   const formData = new FormData();
   data && Object.keys(data).forEach((key) => {

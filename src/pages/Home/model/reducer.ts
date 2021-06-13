@@ -1,6 +1,7 @@
 import { St } from './state';
 import { VoidPayload, AC } from 'types/store';
 import { T_COUNTER } from 'configs/c2Mods';
+import { random } from 'utils/num';
 
 type IAC = AC<T_COUNTER>;
 
@@ -33,10 +34,17 @@ export async function incrementAsync(amount: number, moduleState: St): Promise<P
   return { value: moduleState.value + amount };
 }
 
-export function foo(){
+export function foo() {
   console.log('call foo');
 }
 
-export function clear(){
+export function ranBarData(p: VoidPayload) {
+  const getItem = (i: number) => ({ time: `部门${i}`, value: random(100) });
+  return {
+    barData: new Array(16).fill('').map((v, idx) => getItem(idx)),
+  };
+}
+
+export function clear() {
   console.log('clear');
 }

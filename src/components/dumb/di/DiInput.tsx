@@ -38,7 +38,7 @@ export default function DiInput(props: IProps) {
   const onKeyDown = onEnter ? (e: KeyboardEv) => {
     if (e.keyCode === 13) onEnter(e);
   } : noop;
-  const uiRequred = <pre style={stPre}>{required ? '* ' : '  '}</pre>;
+  const uiRequired = <pre style={stPre}>{required ? '* ' : '  '}</pre>;
 
   const {
     item: itemSt = {},
@@ -87,7 +87,7 @@ export default function DiInput(props: IProps) {
   return (
     <div className={styles.diItemWrap} style={mergedItemSt}>
       <span className={styles.diItemTitle} style={titleSt}>
-        {uiRequred}{title}
+        {uiRequired}{title}
       </span>
       <Input disabled={disabled} value={value} onChange={onChange} onKeyDown={onKeyDown}
         size={inputSize} style={inputSt} placeholder={placeholder} suffix={uiTooltip} />

@@ -3,7 +3,7 @@
  * delare module names in this file
  */
 
-export const DEMO = 'DemoModel' as const;
+export const DEMO = 'Demo' as const;
 export type T_DEMO = typeof DEMO;
 
 export const DEMO_TODO_LIST = 'DemoTodoList' as const;

@@ -1,0 +1,97 @@
+.header {
+  z-index: 88;
+  position: relative;
+  box-shadow: rgb(0 21 41 / 8%) 0px 1px 4px;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 19px 0 0;
+}
+
+.userIconWarp {
+  box-shadow: rgb(0 21 41 / 30%) 0px 1px 4px;
+}
+
+.settingInHeader {
+  font-size: 19px;
+}
+
+.settingInBody {
+  position: fixed;
+  font-size: 24px !important;
+  right: 6px;
+  top: 3px;
+  background-color: white;
+  z-index: 2;
+  box-shadow: rgb(0 21 41 / 8%) 0px 1px 4px;
+}
+
+.headerSettingWrapInBar {
+  position: absolute;
+  font-size: 19px;
+  right: 10px;
+  top: 2px;
+}
+
+.headerRightAreaWrap {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 100px;
+  right: 12px;
+  font-size: 15px;
+  height: 48px;
+  top: 0;
+}
+
+.siderWrap {
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  box-shadow: rgb(0 21 41 / 8%) 0px 1px 4px;
+}
+
+.siderMenusWrap {
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.contentWrap {
+  position: relative;
+  background: #fff;
+  /* background: blue; */
+  padding: 24px;
+  margin: 0;
+  min-height: calc(100vh - 152px);
+}
+
+.SwatchesPicker {
+  width: 450px !important;
+}
+
+.logoWrap {
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 70%
+}
+
+.logoLabelWrap {
+  height: 50px;
+  line-height: 50px;
+  padding: 0px 22px;
+  text-align: left;
+  font-size: 22px;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.footerWrap {
+  text-align: center;
+  padding: 5px;
+  height: 45px;
+}

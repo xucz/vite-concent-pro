@@ -9,6 +9,9 @@ function setup(ctx: CtxDe) {
   on(ev.someEvent, (p1, p2)=>{
     console.log('hover your mouse pointer to p1,p2, you will see the types');
   });
+  ctx.effect(() => {
+    console.warn('Mount DemoUseSetup');
+  }, []);
   const ins = ctx.initState({
     num: 1,
     name: 'xx',

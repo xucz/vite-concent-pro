@@ -77,11 +77,7 @@ export function checkStep1(moduleState: St) {
  * 检查数据源填写页表单提交的信息
  */
 export function checkStep2(moduleState: St) {
-  const { dataExample, dataExampleJson, dbType } = moduleState;
-  // DataInput 控件会始终将填写的字符串同步到 dataExample
-  // 如果完全没有填写过，dataExample才会为空字符串
-  // 此时才从 dataExampleJson 里序列化
-  const targetJsonStr = dataExample || JSON.stringify(dataExampleJson);
-  return checkObject({ dataExample: targetJsonStr, dbType });
+  const { dataExample, dbType } = moduleState;
+  return checkObject({ dataExample, dbType });
 }
 

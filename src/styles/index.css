@@ -1,10 +1,11 @@
-
 :root {
   /* 站点主题颜色，会被 globalModelState里的颜色填入 */
   --theme-color: transparent;
+  --theme-color-rgb: 0, 0, 0;
   --theme-color-light: #91d5ff;
   --theme-color-bg: #e6f8fe;
   --theme-color-grey: #f0f2f5;
+  --theme-color-text: rgba(0, 0, 0, 0.75);
 }
 
 body {
@@ -14,9 +15,48 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--theme-color-grey) !important;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.gHover:hover {
+  cursor: pointer;
+}
+
+/** 美化滚动条 [Start] */
+.smallScBar::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.smallScBar::-webkit-scrollbar-track {
+  width: 7px;
+  background: hsla(0, 0%, 100%, .1);
+  /* background: rgba(#101F1C, 0.5); */
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
+
+.smallScBar::-webkit-scrollbar-thumb {
+  background-color: rgba(#1f8ff8, 1.0);
+  background: hsla(0, 0%, 100%, .2);
+  /* background-color: #c1c1c1; */
+  background-clip: padding-box;
+  min-height: 28px;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
+
+.smallScBar::-webkit-scrollbar-thumb:hover {
+  /* background-color: rgba(#101F1C, 1); */
+  /* background-color: #1f8ff8; */
+  background-color: var(--theme-color-light);
+}
+
+/** 美化滚动条 [End] */

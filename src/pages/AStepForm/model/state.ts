@@ -14,6 +14,11 @@ export interface FieldGroupItem {
 }
 
 function getInitialState() {
+  const dataExampleJson = {
+    desc: '粘贴json数据到此处，或在此输入示例数据',
+    tip: '注意json层级不能超过3层',
+  };
+
   return {
     /** 当前处于第几步 */
     step: 1 as StepRange,
@@ -61,11 +66,8 @@ function getInitialState() {
     /** 预估数量3 */
     count3: 0,
     /** 示例数据 json字符串 */
-    dataExample: '',
-    dataExampleJson: {
-      desc: '粘贴json数据到此处，或在此输入示例数据',
-      tip: '注意json层级不能超过3层',
-    },
+    dataExample: JSON.stringify(dataExampleJson, null, 2),
+    dataExampleJson,
     // ---------------- End ----------------
 
     // ---------- for step3 ----------
