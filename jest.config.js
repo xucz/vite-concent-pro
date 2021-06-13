@@ -48,7 +48,8 @@ const jestConfig = {
 const testMatch = process.env.testMatch;
 if (testMatch) {
   console.log('------ found cutomized testMatch, start compute ------');
-  let prefixedTestMatch = '';
+  let prefixedTestMatch = testMatch;
+
   if (!testMatch.startsWith('<rootDir>')) {
     if (testMatch.startsWith('/')) prefixedTestMatch = `<rootDir>${testMatch}`;
     else prefixedTestMatch = `<rootDir>/${testMatch}`;
